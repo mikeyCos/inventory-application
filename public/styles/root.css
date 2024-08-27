@@ -1,0 +1,19 @@
+/*
+ * Define font-face(s) here
+ * Define custom variables here
+ * Define general styling here
+ */
+
+:root {
+  --font-color-primary: #2e282a;
+  --bkg-color-primary: #17bebb;
+  --bkg-color-secondary: #edb88b;
+  --bkg-color-tertiary: #ef3e36;
+}
+
+body {
+  min-height: 100svh;
+  display: grid;
+  grid-auto-rows: min-content 1fr min-content;
+  background-color: var(--bkg-color-primary);
+}

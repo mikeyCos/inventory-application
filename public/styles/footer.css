@@ -1,0 +1,11 @@
+footer {
+  background-color: var(--font-color-primary);
+  padding: 0.5rem 0;
+  box-shadow: 0 0 4px black;
+  color: var(--bkg-color-secondary);
+}
+
+footer > div {
+  display: flex;
+  justify-content: center;
+}
