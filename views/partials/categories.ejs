@@ -1,0 +1,9 @@
+<div class="categories">
+  <ul>
+    <% categories.map((category) => { %>
+      <li>
+        <a href="/category/<%= category %>"><%= category %></a>
+      </li>
+    <% }) %>
+  </ul>
+</div>

@@ -2,17 +2,26 @@
   <nav>
     <ul class="nav-left">
       <li>
-        <a href="#"></a>
+        <a href="#">Placeholder</a>
       </li>
     </ul>
 
     <ul class="nav-right">
-      <li>
+      <li class="nav-item">
         <a href="/">Home</a>
       </li>
 
-      <li>
-        <a href="/placeholderA">Placeholder A</a>
+      <li class="nav-item drop-down">
+        <a href="#">Shop By Category</a>
+        <%- include('./categories', { categories }) %>
+      </li>
+
+      <li class="nav-item">
+        <a href="/add/category">Add Category</a>
+      </li>
+
+      <li class="nav-item">
+        <a href="/add/item">Add item</a>
       </li>
     </ul>
   </nav>

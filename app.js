@@ -3,6 +3,8 @@ const { PORT } = require("./utils/environment");
 const { staticPaths, viewsPaths } = require("./paths/paths");
 const indexRouter = require("./routes/indexRouter");
 const placeholderRouter = require("./routes/placeholderRouter");
+const categoriesRouter = require("./routes/categoriesRouter");
+const addRouter = require("./routes/addRouter");
 
 const app = express();
 
@@ -19,6 +21,8 @@ app.use(express.urlencoded({ extended: true }));
 // Specify routes
 app.use("/", indexRouter);
 app.use("/placeholderA", placeholderRouter);
+app.use("/category", categoriesRouter);
+app.use("/add", addRouter);
 
 app.use((req, res) => {
   res.render("404", { title: "404 - Page Not Found" });
