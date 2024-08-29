@@ -1,5 +1,11 @@
 # Changelog
 ---
+### 28 AUG 2024
+- Clicking on a category revealed by hovering over `Shop By Category` will render the `category` view.
+- Temporarily commented out `include('./items')` in the `category` view.
+- Created and defined attributes for labels and inputs for `addItem` and `addRouter` views.
+- Added `post` route method to `addRouter`; submitting the category or item forms will use the `post` method.
+---
 ### 27 AUG 2024
 - Initial commit for `inventory-application` project.
 - Created `addCategory`, `addItem`, `category`, `item`, `categories`, `itemPreview`, and `items` views.

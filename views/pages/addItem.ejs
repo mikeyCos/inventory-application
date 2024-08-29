@@ -6,6 +6,35 @@
   <main>
     <section id="add-item">
       <h2>Add Item</h2>
+      <form action="/add/item" method="post">
+        <ul>
+          <li>
+            <label for="category">Category</label>
+            <input id="category" name="category" type="text">
+          </li>
+
+          <li>
+            <label for="item">Item:</label>
+            <input id="item" name="item" type="text">
+          </li>
+
+          <li>
+            <label for="upc">UPC:</label>
+            <input id="upc" name="upc" type="text">
+          </li>
+          
+          <li>
+            <label for="quantity">Quantity</label>
+            <input id="quantity" name="quantity" type="number">
+          </li>
+          
+          <li>
+            <label for="price">Unit price:</label>
+            <input id="price" name="price" type="number" step="0.01">
+          </li>
+        </ul>
+        <button type="submit">Add Category</button>
+      </form>
     </section>
   </main>
   <%- include('./footer') %>
