@@ -2,15 +2,19 @@
 <html lang="en">
 <%- include('./head') %>
 <body>
+  <link rel="stylesheet" href="/styles/add.css">
   <%- include('./header') %>
   <main>
     <section id="add-category">
-      <h2>Add Category</h2>
       <form action="/add/category" method="post">
+        <h2>Add Category</h2>
         <ul>
           <li>
             <label for="category">Category</label>
-            <input id="category" name="category" type="text">
+            <input id="category" name="category" type="text" value="<%= locals.input ? input.category : '' %>">
+            <% if (locals.errors && errors.category) { %>
+              <p><%= errors.category.msg %></p>
+            <% } %>
           </li>
         </ul>
         <button type="submit">Add Category</button>

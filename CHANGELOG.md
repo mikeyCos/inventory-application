@@ -1,5 +1,11 @@
 # Changelog
 ---
+### 29 AUG 2024
+- Created a screen breakpoint of `481px` for the `header` partial view and `add*` pages.
+- Currently, `addCategory` and `addItem` views use conditionals to render an input's error.
+- Errors from `validationResult(req)` are reduced to an object; the error's `path` will be an object property with `value` and `msg` properties.
+- Created `add` stylesheet for styling `addCategory` and `addItem` views.
+---
 ### 28 AUG 2024
 - Clicking on a category revealed by hovering over `Shop By Category` will render the `category` view.
 - Temporarily commented out `include('./items')` in the `category` view.

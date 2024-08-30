@@ -17,7 +17,7 @@ const indexController = {
     console.log("getIndex running...");
     console.log("req.url", req.url);
     // Need to select categories from db
-    res.render("index", { title: "Home", categories });
+    res.render("index", { title: "Home", categories, path: req.originalUrl });
   }),
 };
 

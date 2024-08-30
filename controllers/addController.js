@@ -14,34 +14,67 @@ const categories = [
 ];
 
 const validateCategory = [
-  body("category").trim().isLength({ min: 3, max: 20 }),
+  body("category")
+    .trim()
+    .isLength({ min: 3, max: 20 })
+    .withMessage("Category input must be between 3 and 20 characters long."),
 ];
 const validateItem = [
-  body("category").trim().isLength({ min: 3, max: 20 }).optional(),
-  body("item").trim().isLength({ min: 3, max: 30 }),
-  body("upc").trim().isLength({ min: 10, max: 12 }),
-  body("quantity").trim().isInt({ max: 999999 }),
-  body("price").trim(),
+  body("category")
+    .trim()
+    .isLength({ min: 3, max: 20 })
+    .optional({ values: "falsy" })
+    .withMessage(
+      "Category input is optional. However, the value must be between 3 and 20 characters long."
+    ),
+  body("item")
+    .trim()
+    .isLength({ min: 3, max: 30 })
+    .withMessage("Item input must be between 3 and 30 characters long."),
+  body("upc")
+    .trim()
+    .isNumeric()
+    .isLength({ min: 10, max: 12 })
+    .withMessage("UPC must be between 10 and 12 digits long."),
+  body("quantity")
+    .trim()
+    .isInt({ min: 0, max: 999999 })
+    .withMessage("Quantity must be between 0 and 999,999."),
+  body("price")
+    .trim()
+    .isFloat({ min: 0.01, max: 999999 })
+    .withMessage("Price must be between 0.01 and 999,999."),
 ];
 
 const addController = {
-  getAddCategory: asyncHandler((req, res) => {
+  getAddCategory: asyncHandler(async (req, res) => {
     console.log("getAddCategory running...");
-    res.render("addCategory", { title: "Add Category", categories });
+    console.log("req.originalUrl:", req.originalUrl);
+    res.render("addCategory", {
+      title: "Add Category",
+      categories,
+    });
   }),
-  getAddItem: asyncHandler((req, res) => {
+  getAddItem: asyncHandler(async (req, res) => {
     res.render("addItem", { title: "Add Item", categories });
   }),
   postAddCategory: [
     validateCategory,
-    asyncHandler((req, res) => {
+    asyncHandler(async (req, res) => {
       const errors = validationResult(req);
 
       if (!errors.isEmpty()) {
-        console.log("errors is NOT empty");
+        const localErrors = errors
+          .array()
+          .reduce((accumulator, currentError) => {
+            const { path, value, msg } = currentError;
+            return { ...accumulator, [path]: { value, msg } };
+          }, {});
+
         return res.status(400).render("addCategory", {
           title: "Add Category",
-          errors: errors.array(),
+          errors: { ...localErrors },
+          input: { ...req.body },
           categories,
         });
       }
@@ -49,13 +82,21 @@ const addController = {
   ],
   postAddItem: [
     validateItem,
-    asyncHandler((req, res) => {
+    asyncHandler(async (req, res) => {
       const errors = validationResult(req);
 
       if (!errors.isEmpty()) {
+        const localErrors = errors
+          .array()
+          .reduce((accumulator, currentError) => {
+            const { path, value, msg } = currentError;
+            return { ...accumulator, [path]: { value, msg } };
+          }, {});
+
         return res.status(400).render("addItem", {
           title: "Add Item",
-          errors: errors.array(),
+          errors: { ...localErrors },
+          inputs: { ...req.body },
           categories,
         });
       }

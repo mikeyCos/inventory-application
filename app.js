@@ -31,6 +31,7 @@ app.use((req, res) => {
 // Error middleware function
 app.use((err, req, res, next) => {
   console.log("error middleware running...");
+  console.log(req.url);
 });
 
 app.listen(PORT, () => console.log(`Application running on port: ${PORT}`));
