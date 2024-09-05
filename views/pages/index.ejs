@@ -7,6 +7,15 @@
       <section id="home">
         <h2>Index</h2>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Est error dolor rerum quaerat aliquam voluptate eligendi delectus ab illum consequuntur? Odit eum quas error et enim voluptatem quam voluptates iste.</p>
+        <div class="test">
+          <ul>
+            <% foo.map((item) => { %>
+              <li>
+                <%= item.category %>
+              </li>
+            <% }) %>
+          </ul>
+        </div>
       </section>
     </main>
     <%- include('./footer') %>

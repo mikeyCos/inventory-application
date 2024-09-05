@@ -1,5 +1,16 @@
 # Changelog
 ---
+### 05 SEP 2024
+- 
+---
+### 04 SEP 2024
+- Created skeleton methods in `queries` module.
+---
+### 03 SEP 2024
+- Attached Fly Postgres cluster to application; `DATABASE_URL` will be used in development and production.
+- Initialized a `categories` table with nine different rows in the Postgres database.
+- Created `getCategories` in `queries` module; selects all rows in the `categories` table.
+---
 ### 29 AUG 2024
 - Created a screen breakpoint of `481px` for the `header` partial view and `add*` pages.
 - Currently, `addCategory` and `addItem` views use conditionals to render an input's error.
