@@ -12,7 +12,7 @@
           <li>
             <label for="category">Category</label>
             <input id="category" name="category" type="text" value="<%= locals.inputs ? inputs.category: '' %>">
-            <% if (locals.errors && errors.category) { %>
+            <% if (locals.errors?.category) { %>
               <p><%= errors.category.msg %></p>
             <% } %>
           </li>
@@ -20,7 +20,7 @@
           <li>
             <label for="item">Item:</label>
             <input id="item" name="item" type="text" value="<%= locals.inputs ? inputs.item: '' %>">
-            <% if (locals.errors && errors.item) { %>
+            <% if (locals.errors?.item) { %>
               <p><%= errors.item.msg %></p>
             <% } %>
           </li>
@@ -28,7 +28,7 @@
           <li>
             <label for="upc">UPC:</label>
             <input id="upc" name="upc" inputmode="numeric" oninput="this.value = this.value.replace(/\D+/g, '')" value="<%= locals.inputs ? inputs.upc: '' %>">
-            <% if (locals.errors && errors.upc) { %>
+            <% if (locals.errors?.upc) { %>
               <p><%= errors.upc.msg %></p>
             <% } %>
           </li>
@@ -36,7 +36,7 @@
           <li>
             <label for="quantity">Quantity</label>
             <input id="quantity" name="quantity" type="number" value="<%= locals.inputs ? inputs.quantity: '' %>">
-            <% if (locals.errors && errors.quantity) { %>
+            <% if (locals.errors?.quantity) { %>
               <p><%= errors.quantity.msg %></p>
             <% } %>
           </li>
@@ -44,7 +44,7 @@
           <li>
             <label for="price">Unit price:</label>
             <input id="price" name="price" type="number" step="0.01" value="<%= locals.inputs ? inputs.price: '' %>">
-            <% if (locals.errors && errors.price) { %>
+            <% if (locals.errors?.price) { %>
               <p><%= errors.price.msg %></p>
             <% } %>
           </li>

@@ -1,19 +1,9 @@
 const asyncHandler = require("express-async-handler");
-
-const categories = [
-  "Beverages",
-  "Bakery",
-  "Canned",
-  "Dairy",
-  "Dry",
-  "Frozen",
-  "Meat",
-  "Produce",
-  "Other",
-];
+const { getCategories } = require("../db/queries");
 
 const placeholderController = {
   getPlaceholder: asyncHandler(async (req, res) => {
+    const categories = await getCategories();
     res.render("placeholderA", { title: "placeholderA", categories });
   }),
 };

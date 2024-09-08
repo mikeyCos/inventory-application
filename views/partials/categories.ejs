@@ -1,8 +1,8 @@
-<div class="categories">
+<div class="categories-nav">
   <ul>
-    <% categories.map((category) => { %>
+    <% categories.map((categoryObj) => { %>
       <li>
-        <a href="/category/<%= category %>"><%= category %></a>
+        <a href="/category/<%= categoryObj.category %>"><%= categoryObj.category %></a>
       </li>
     <% }) %>
   </ul>

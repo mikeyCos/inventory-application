@@ -12,7 +12,7 @@
           <li>
             <label for="category">Category</label>
             <input id="category" name="category" type="text" value="<%= locals.input ? input.category : '' %>">
-            <% if (locals.errors && errors.category) { %>
+            <% if (locals.errors?.category) { %>
               <p><%= errors.category.msg %></p>
             <% } %>
           </li>

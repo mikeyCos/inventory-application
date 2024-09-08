@@ -21,7 +21,7 @@ app.use(express.urlencoded({ extended: true }));
 // Specify routes
 app.use("/", indexRouter);
 app.use("/placeholderA", placeholderRouter);
-app.use("/category", categoriesRouter);
+app.use(["/category", "/categories"], categoriesRouter);
 app.use("/add", addRouter);
 
 app.use((req, res) => {

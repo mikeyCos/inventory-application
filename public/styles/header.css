@@ -14,7 +14,7 @@ nav > ul {
   gap: 1rem;
 }
 
-nav .categories {
+nav .categories-nav {
   display: none;
   position: absolute;
 }
@@ -23,7 +23,7 @@ nav .categories {
   position: relative;
 }
 
-.drop-down:hover .categories {
+.drop-down:hover .categories-nav {
   display: block;
 }
 

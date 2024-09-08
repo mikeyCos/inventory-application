@@ -16,12 +16,12 @@ const queries = {
     return rows;
   },
   getItems: async ({ category }) => {},
-  insertCategory: async ({ category }) => {
+  insertCategory: async (category) => {
     // What if category already exists?
     await pool.query(
       `
       INSERT INTO categories (category)
-      VALUES ($1);
+      VALUES (LOWER($1));
     `,
       [category]
     );

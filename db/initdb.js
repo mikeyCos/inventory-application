@@ -21,36 +21,22 @@ const { DATABASE_URL } = require("../utils/environment");
 const CATEGORIES_SQL = `
   CREATE TABLE IF NOT EXISTS categories (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    category VARCHAR(20)
+    category VARCHAR(20) NOT NULL,
+    UNIQUE (category)
   );
 
   INSERT INTO categories (category)
-  VALUES ('Unassigned'),
-  ('Beverages'),
-  ('Bakery'),
-  ('Canned'),
-  ('Dairy'),
-  ('Dry'),
-  ('Frozen'),
-  ('Meat'),
-  ('Produce'),
-  ('Other');
+  VALUES ('unassigned'),
+  ('beverages'),
+  ('bakery'),
+  ('canned'),
+  ('dairy'),
+  ('dry'),
+  ('frozen'),
+  ('meat'),
+  ('produce'),
+  ('other');
 `;
-
-/* const ITEMS_SQL = `
-  CREATE TABLE IF NOT EXISTS items (
-    category_id INTEGER(2),
-    name VARCHAR(30),
-    upc INTEGER(12),
-    quantity INTEGER(6),
-    price FLOAT(42)
-  );
-
-  INSERT INTO items (category_id, name, upc, quantity, price)
-  VALUES (1, 'Test', 123456789012, 2, 3.99),
-  (1, 'Foo', 987654321012, 20, 5.49),
-  (4, 'Bar', 987654321021, 17, 12.99);
-`; */
 
 const ITEMS_SQL = `
   CREATE TABLE IF NOT EXISTS items (
@@ -58,7 +44,7 @@ const ITEMS_SQL = `
     name VARCHAR(30),
     upc BIGINT,
     quantity INTEGER,
-    price DECIMAL(4, 2)
+    price DECIMAL(4, 2),
   );
 
   INSERT INTO items (category_id, name, upc, quantity, price)
@@ -73,8 +59,8 @@ const initDB = async () => {
   });
 
   await client.connect();
-  // await client.query(CATEGORIES_SQL);
-  await client.query(ITEMS_SQL);
+  await client.query(CATEGORIES_SQL);
+  // await client.query(ITEMS_SQL);
   await client.end();
 };
 

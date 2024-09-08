@@ -1,7 +1,10 @@
 # Changelog
 ---
-### 05 SEP 2024
+### 07 SEP 2024
 - 
+---
+### 05 SEP 2024
+- Defined `ITEMS_SQL` string variable in `initdb` module.
 ---
 ### 04 SEP 2024
 - Created skeleton methods in `queries` module.
