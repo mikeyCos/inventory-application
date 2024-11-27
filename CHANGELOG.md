@@ -1,7 +1,19 @@
 # Changelog
 ---
+#
+---
+### 26 NOV 2024
+- Currently, adding an item where the category exists or does not exist and the UPC does exists will update the existing item based on the UPC.
+- Navigating to a category will render items assigned to it's respective category.
+- Renamed `rowCount` property for `getCategory` and `getItem` resulting objects to ``categoryExists` and `upcExists` respectively.
+- Created `getCategory`, `getItem`, and `updateItem` query methods in `queries` module. 
+- Deleted `item.ejs` and `itemPreview.ejs` files.
+- Attempted implementing `IF...ELSE IF` for the `insertItem` query.
+---
 ### 07 SEP 2024
-- 
+- Each controller calls `getCategories` from the `queries` module.
+- Clicking on `Browse By Category` will direct a user to the `categories` page.
+- A category can be created on the `addCategory` page.
 ---
 ### 05 SEP 2024
 - Defined `ITEMS_SQL` string variable in `initdb` module.

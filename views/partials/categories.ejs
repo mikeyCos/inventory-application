@@ -1,9 +1,21 @@
 <div class="categories-nav">
-  <ul>
-    <% categories.map((categoryObj) => { %>
-      <li>
-        <a href="/category/<%= categoryObj.category %>"><%= categoryObj.category %></a>
-      </li>
-    <% }) %>
-  </ul>
+  <% if (categories.length) { %>
+    <ul>
+      <% categories.map((categoryObj) => { %>
+        <li>
+          <a href="/category/<%= categoryObj.category %>"><%= categoryObj.category %></a>
+          <% if (locals.delete) { %>
+            <form action="/category/delete/<%= categoryObj.category %>" method="post">
+              <button type="submit">
+                <%- include("../../public/assets/icons/delete.svg") %>
+              </button>
+            </form>
+          <% } %>
+        </li>
+      <% }) %>
+    </ul>
+  <% } else { %>
+    <p>There are 0 categories.</p>
+  <% } %>
+ 
 </div>

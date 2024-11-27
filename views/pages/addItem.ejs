@@ -11,7 +11,7 @@
         <ul>
           <li>
             <label for="category">Category</label>
-            <input id="category" name="category" type="text" value="<%= locals.inputs ? inputs.category: '' %>">
+            <input id="category" name="category" type="text" value="<%= locals.inputs ? inputs.category: 'Unassigned' %>">
             <% if (locals.errors?.category) { %>
               <p><%= errors.category.msg %></p>
             <% } %>
@@ -49,7 +49,7 @@
             <% } %>
           </li>
         </ul>
-        <button type="submit">Add Category</button>
+        <button type="submit">Add Item</button>
       </form>
     </section>
   </main>

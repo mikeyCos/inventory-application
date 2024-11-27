@@ -6,7 +6,7 @@
   <main>
     <section id="category">
       <h2><%= category %></h2>
-      <%# include('./items') %>
+      <%- include('./items', { items }) %>
     </section>
   </main>
   <%- include('./footer') %>

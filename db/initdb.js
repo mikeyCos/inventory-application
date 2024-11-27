@@ -45,12 +45,13 @@ const ITEMS_SQL = `
     upc BIGINT,
     quantity INTEGER,
     price DECIMAL(4, 2),
+    CONSTRAINT uq_item UNIQUE (name, upc)
   );
 
   INSERT INTO items (category_id, name, upc, quantity, price)
-  VALUES (1, 'Test', 123456789012, 2, 3.99),
-  (1, 'Foo', 987654321012, 20, 5.49),
-  (4, 'Bar', 987654321021, 17, 12);
+  VALUES ((SELECT id FROM categories WHERE category = 'bakery'), 'Test', 123456789012, 2, 3.99),
+  ((SELECT id FROM categories WHERE category = 'unassigned'), 'Foo', 987654321012, 20, 5.49),
+  ((SELECT id FROM categories WHERE category = 'produce'), 'Bar', 987654321021, 17, 12);
 `;
 
 const initDB = async () => {
@@ -60,7 +61,7 @@ const initDB = async () => {
 
   await client.connect();
   await client.query(CATEGORIES_SQL);
-  // await client.query(ITEMS_SQL);
+  await client.query(ITEMS_SQL);
   await client.end();
 };
 

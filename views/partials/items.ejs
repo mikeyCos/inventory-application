@@ -1,5 +1,9 @@
 <section id="items">
-  <% items.map((item) => { %>
-    <%- include('./itemPreview', { ...item }) %>
-  <% }) %>
+  <% if (items.length) { %>
+    <% items.map((item) => { %>
+      <%- include('./item', { ...item }) %>
+    <% }) %>
+  <% } else { %>
+    <p>There are no items assigned to the <%= category %> category.</p>
+  <% } %>
 </section>
