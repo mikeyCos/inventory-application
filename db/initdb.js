@@ -19,6 +19,8 @@ const { DATABASE_URL } = require("../utils/environment");
  */
 
 const CATEGORIES_SQL = `
+  DROP TABLE IF EXISTS categories;
+
   CREATE TABLE IF NOT EXISTS categories (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     category VARCHAR(20) NOT NULL,
@@ -39,6 +41,8 @@ const CATEGORIES_SQL = `
 `;
 
 const ITEMS_SQL = `
+  DROP TABLE IF EXISTS items;
+
   CREATE TABLE IF NOT EXISTS items (
     category_id INTEGER,
     name VARCHAR(30),

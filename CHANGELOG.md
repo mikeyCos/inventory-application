@@ -1,6 +1,10 @@
 # Changelog
 ---
-#
+### 
+---
+### 27 NOV 2024
+- Added `edit.svg` to `icons` subdirectory.
+- The categories and items tables will be deleted when `node db/initdb.js` is ran in the terminal.
 ---
 ### 26 NOV 2024
 - Currently, adding an item where the category exists or does not exist and the UPC does exists will update the existing item based on the UPC.

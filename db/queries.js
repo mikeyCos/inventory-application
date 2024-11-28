@@ -150,7 +150,7 @@ const queries = {
       [category, item, upc, quantity, price]
     );
   },
-  deleteCategory: async (category) => {
+  deleteCategory: async ({ category }) => {
     console.log("deleteCategory running...");
     // What if category does not exist?
     // Change category for all items of category to 'unassigned'

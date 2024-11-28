@@ -3,14 +3,15 @@
     <ul>
       <% categories.map((categoryObj) => { %>
         <li>
-          <a href="/category/<%= categoryObj.category %>"><%= categoryObj.category %></a>
-          <% if (locals.delete) { %>
+          <a href="/category/<%= categoryObj.category %>"><%= categoryObj.category %>
+          <% if (locals.delete && categoryObj.category !== 'unassigned') { %>
             <form action="/category/delete/<%= categoryObj.category %>" method="post">
               <button type="submit">
                 <%- include("../../public/assets/icons/delete.svg") %>
               </button>
             </form>
           <% } %>
+          </a>
         </li>
       <% }) %>
     </ul>
