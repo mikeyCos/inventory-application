@@ -1,6 +1,12 @@
 # Changelog
 ---
-### 
+### 29 NOV 2024
+- 
+---
+### 28 NOV 2024
+- Created `itemForm.ejs`.
+- Created `deleteCategory` and `updateItems` query methods in `queries` module.
+- Clicking on the trashcan icon will delete it's respective category and impacted items are reassigned to the `unassigned` category.
 ---
 ### 27 NOV 2024
 - Added `edit.svg` to `icons` subdirectory.

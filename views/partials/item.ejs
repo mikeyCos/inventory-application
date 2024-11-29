@@ -4,4 +4,8 @@
   <p>quantity: <%= quantity %></p>
   <p>unit price: <%= price %></p>
   <p>total price: <%= (price * quantity) %></p>
+  <form action="/category/item/delete/<%= upc %>" method="post">
+    <button type="submit">
+      <%- include("../../public/assets/icons/delete.svg") %>
+    </button>
 </article>

@@ -21,12 +21,12 @@ const validateCategory = [
 const validateItem = [
   body("category")
     .trim()
+    .default("Unassigned")
     .isAlpha()
     .isLength({ min: 3, max: 20 })
     .withMessage(
-      "Category input is optional. However, the value must be between 3 and 20 letters long."
-    )
-    .optional({ values: "falsy" }),
+      "Category input is optional and the value will default to 'Unassigned'. However, the value must be between 3 and 20 letters long."
+    ),
   body("item")
     .trim()
     .isLength({ min: 3, max: 30 })
@@ -115,6 +115,7 @@ const addController = {
     asyncHandler(async (req, res) => {
       const errors = validationResult(req);
       const categories = await getCategories();
+      console.log("req.body:", req.body);
       if (!errors.isEmpty()) {
         const localErrors = errors
           .array()

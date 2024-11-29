@@ -97,38 +97,6 @@ const queries = {
     console.log("insertItem running...");
     console.log("category:", category);
     console.log("upc:", upc);
-    /* const result = await pool.query(
-      `
-    IF (NOT EXISTS(SELECT * FROM items WHERE upc = $3) AND EXISTS(SELECT * FROM categories WHERE category = $1))
-    BEGIN
-      INSERT INTO items (category_id, name, upc, quantity, price)
-      VALUES ((SELECT id FROM categories WHERE category = LOWER($1)), $2, $3, $4, $5);
-    END
-    ELSE IF (NOT EXISTS(SELECT * FROM categories WHERE category = LOWER($1)) AND EXISTS(SELECT * FROM items WHERE upc = $3))
-    BEGIN
-      INSERT INTO categories (category)
-      VALUES (LOWER($1));
-      UPDATE items
-      SET category_id = (SELECT category_id FROM categories WHERE category = LOWER($1))
-      WHERE upc = $3;
-    END
-    ELSE IF (EXISTS(SELECT * FROM categories WHERE category = LOWER($1)) AND EXISTS(SELECT * FROM items WHERE upc = $3))
-    BEGIN
-      UPDATE items
-      SET category_id = (SELECT category_id FROM categories WHERE category = LOWER($1))
-      WHERE upc = $3;
-    END
-    ELSE
-    BEGIN
-      INSERT INTO categories (category)
-      VALUES (LOWER($1));
-      INSERT INTO items (category_id, name, upc, quantity, price)
-      VALUES ((SELECT category_id FROM categories WHERE category = LOWER($1)), $2, $3, $4, $5);
-    END
-    `,
-      [category, item, upc, quantity, price]
-    ); */
-    // SELECT * FROM items WHERE upc = $3 returns an
 
     await pool.query(
       `
@@ -150,18 +118,33 @@ const queries = {
       [category, item, upc, quantity, price]
     );
   },
-  deleteCategory: async ({ category }) => {
-    console.log("deleteCategory running...");
-    // What if category does not exist?
+  updateItems: async ({ category }) => {
+    console.log("updateItems running...");
     // Change category for all items of category to 'unassigned'
-    const { rowCount } = await pool.query(
+    /* 
+    SELECT * FROM items
+    INNER JOIN categories
+    ON items.category_id = categories.id;
+    */
+    await pool.query(
       `
-      DELETE FROM categories
-      WHERE category = ($1);
+      UPDATE items
+      SET category_id = (SELECT id FROM categories WHERE category = 'unassigned') 
+      WHERE (SELECT id FROM categories WHERE category = LOWER($1)) = category_id;
       `,
       [category]
     );
-    console.log(rowCount);
+  },
+  deleteCategory: async ({ category }) => {
+    console.log("deleteCategory running...");
+
+    await pool.query(
+      `
+      DELETE FROM categories
+      WHERE category = LOWER($1)
+      `,
+      [category]
+    );
   },
   deleteItem: async () => {},
 };

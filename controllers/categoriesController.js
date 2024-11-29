@@ -1,5 +1,10 @@
 const asyncHandler = require("express-async-handler");
-const { getItems, getCategories, deleteCategory } = require("../db/queries");
+const {
+  getItems,
+  getCategories,
+  deleteCategory,
+  updateItems,
+} = require("../db/queries");
 
 const categoriesController = {
   getCategories: asyncHandler(async (req, res) => {
@@ -21,8 +26,11 @@ const categoriesController = {
     console.log(req.url);
     console.log(req.params);
     // Run db query to delete category
+    // Which makes more sense, update items before deleting category or
+    // deleting category before updating items?
     // How to show a confirmation modal?
     // Does it make sense to define a modal on the server side?
+    await updateItems(req.params);
     await deleteCategory(req.params);
     // Redirect vs render
     res.redirect("/categories");
