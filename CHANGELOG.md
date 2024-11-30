@@ -1,7 +1,11 @@
 # Changelog
 ---
 ### 29 NOV 2024
-- 
+- Created `events` subdirectory.
+- Created `modal.ejs`.
+- The item's `category_id` value are randomly assigned in `initdb` module.
+- Defined `eventsPath` in `paths` module.
+- Clicking the trashcan icon will now open the dialog element.
 ---
 ### 28 NOV 2024
 - Created `itemForm.ejs`.

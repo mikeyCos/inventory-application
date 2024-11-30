@@ -53,9 +53,9 @@ const ITEMS_SQL = `
   );
 
   INSERT INTO items (category_id, name, upc, quantity, price)
-  VALUES ((SELECT id FROM categories WHERE category = 'bakery'), 'Test', 123456789012, 2, 3.99),
-  ((SELECT id FROM categories WHERE category = 'unassigned'), 'Foo', 987654321012, 20, 5.49),
-  ((SELECT id FROM categories WHERE category = 'produce'), 'Bar', 987654321021, 17, 12);
+  VALUES ((SELECT id FROM categories ORDER BY RANDOM() LIMIT 1), 'Test', 123456789012, 2, 3.99),
+  ((SELECT id FROM categories ORDER BY RANDOM() LIMIT 1), 'Foo', 987654321012, 20, 5.49),
+  ((SELECT id FROM categories ORDER BY RANDOM() LIMIT 1), 'Bar', 987654321021, 17, 12);
 `;
 
 const initDB = async () => {

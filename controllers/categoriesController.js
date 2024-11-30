@@ -10,7 +10,15 @@ const categoriesController = {
   getCategories: asyncHandler(async (req, res) => {
     console.log("getCategories running from categoriesController...");
     const categories = await getCategories();
-    res.render("categories", { title: "Categories", categories });
+    // res.render("categories", {
+    //   title: "Categories",
+    //   categories,
+    //   clickHandler: "openModalHandler(openModal)",
+    // });
+    res.render("categories", {
+      title: "Categories",
+      categories,
+    });
   }),
   getCategoryItems: asyncHandler(async (req, res) => {
     // Need to select items from category
