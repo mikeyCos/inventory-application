@@ -1,5 +1,11 @@
 # Changelog
 ---
+### 05 NOV 2024
+- Created `categories.css` stylesheet.
+- Attempted send a get request by form buttons to render a opened modal.
+- Currently, edit and delete buttons do not do anything.
+- Moved form elements next to the anchor element in the `categories` partial.
+---
 ### 29 NOV 2024
 - Created `events` subdirectory.
 - Created `modal.ejs`.

@@ -11,6 +11,11 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+button {
+  background: none;
+  border: none;
+}
+
 button:hover {
   cursor: pointer;
 }

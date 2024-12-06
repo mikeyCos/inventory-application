@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <%- include('./head') %>
-
+<link rel="stylesheet" href="/styles/categories.css">
 <body>
   <%- include('./header') %>
   <main>
     <section id="categories">
       <%- include('../partials/categories', { categories, delete: true }) %>
     </section>
-    <%- include('../partials/modal') %>
+    <%- include('../partials/modal', { showModal }) %>
   </main>
   <%- include('./footer') %>
 </body>

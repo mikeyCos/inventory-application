@@ -6,19 +6,7 @@
   <%- include('./header') %>
   <main>
     <section id="add-category">
-      <form action="/add/category" method="post">
-        <h2>Add Category</h2>
-        <ul>
-          <li>
-            <label for="category">Category</label>
-            <input id="category" name="category" type="text" value="<%= locals.input ? input.category : '' %>">
-            <% if (locals.errors?.category) { %>
-              <p><%= errors.category.msg %></p>
-            <% } %>
-          </li>
-        </ul>
-        <button type="submit">Add Category</button>
-      </form>
+      <%- include('./categoryForm') %>
     </section>
   </main>
   <%- include('./footer') %>

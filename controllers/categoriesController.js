@@ -10,6 +10,10 @@ const categoriesController = {
   getCategories: asyncHandler(async (req, res) => {
     console.log("getCategories running from categoriesController...");
     const categories = await getCategories();
+    // https://stackoverflow.com/questions/59564689/how-to-make-an-modal-with-ejs-and-node
+    const showModal = req.body.modal;
+    console.log(req.body);
+    console.log(showModal);
     // res.render("categories", {
     //   title: "Categories",
     //   categories,
@@ -18,6 +22,7 @@ const categoriesController = {
     res.render("categories", {
       title: "Categories",
       categories,
+      showModal,
     });
   }),
   getCategoryItems: asyncHandler(async (req, res) => {

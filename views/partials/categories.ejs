@@ -3,18 +3,20 @@
     <ul>
       <% categories.map((categoryObj) => { %>
         <li>
-            <a href="/category/<%= categoryObj.category %>"><%= categoryObj.category %>
-            <% if (locals.delete && categoryObj.category !== 'unassigned') { %>
-              <form action="/category/delete/<%= categoryObj.category %>" method="post">
-                <button type="button" onclick="openModalHandler(event)">
+          <a href="/category/<%= categoryObj.category %>"><%= categoryObj.category %></a>
+          <% if (locals.delete && categoryObj.category !== 'unassigned') { %>
+              <form method="get">
+                <button type="button" onclick="openModalHandler(event, '<%= categoryObj %>')">
                   <%- include("../../public/assets/icons/delete.svg") %>
                 </button>
                 <button type="button" onclick="openModalHandler(event)">
                   <%- include("../../public/assets/icons/edit.svg") %>
                 </button>
+
+                <button type="submit" name="modal" value="open">Open</button>
+                <button type="submit" name="modal" value="open">Open</button>
               </form>
             <% } %>
-          </a>
         </li>
       <% }) %>
     </ul>
