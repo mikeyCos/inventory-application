@@ -8,7 +8,8 @@ const {
 const categoriesRouter = new Router();
 
 categoriesRouter.get("/:category", getCategoryItems);
-categoriesRouter.get("/", getCategories);
+categoriesRouter.get(["/", "/delete/confirm/:categoryID"], getCategories);
+// categoriesRouter.get('/delete/confirm', getCategoryDelete);
 categoriesRouter.post("/delete/:category", postCategoryDelete);
 
 module.exports = categoriesRouter;

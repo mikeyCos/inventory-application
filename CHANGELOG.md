@@ -1,6 +1,11 @@
 # Changelog
 ---
-### 05 NOV 2024
+### 09 DEC 2024
+- Corrected date of previous log from `05 NOV 2024` to `06 DEC 2024`.
+- Clicking a button when the modal is open appends to the current URL string; for example, `/categories/delete/confirm/categories/delete/confirm/2?modal=open`.
+- Opened modal cannot be closed with `ESC` key.
+---
+### 05 DEC 2024
 - Created `categories.css` stylesheet.
 - Attempted send a get request by form buttons to render a opened modal.
 - Currently, edit and delete buttons do not do anything.

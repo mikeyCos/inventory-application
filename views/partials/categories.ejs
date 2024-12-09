@@ -5,13 +5,8 @@
         <li>
           <a href="/category/<%= categoryObj.category %>"><%= categoryObj.category %></a>
           <% if (locals.delete && categoryObj.category !== 'unassigned') { %>
-              <form method="get">
-                <button type="button" onclick="openModalHandler(event, '<%= categoryObj %>')">
-                  <%- include("../../public/assets/icons/delete.svg") %>
-                </button>
-                <button type="button" onclick="openModalHandler(event)">
-                  <%- include("../../public/assets/icons/edit.svg") %>
-                </button>
+              <form action="categories/delete/confirm/<%= categoryObj.id %>" method="get">
+
 
                 <button type="submit" name="modal" value="open">Open</button>
                 <button type="submit" name="modal" value="open">Open</button>
