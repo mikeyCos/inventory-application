@@ -4,6 +4,7 @@ const {
   getCategories,
   deleteCategory,
   updateItems,
+  getCategory,
 } = require("../db/queries");
 
 const categoriesController = {
@@ -11,13 +12,10 @@ const categoriesController = {
     console.log("getCategories running from categoriesController...");
     const categories = await getCategories();
     // https://stackoverflow.com/questions/59564689/how-to-make-an-modal-with-ejs-and-node
-    const showModal = !!req.query.modal;
-    // const showModal = true;
     console.log("req.url:", req.url);
     console.log("req.query:", req.query);
     console.log("req.params:", req.params);
     console.log("req.body:", req.body);
-    console.log("showModal:", showModal);
     // res.render("categories", {
     //   title: "Categories",
     //   categories,
@@ -26,7 +24,6 @@ const categoriesController = {
     res.render("categories", {
       title: "Categories",
       categories,
-      showModal,
     });
   }),
   getCategoryItems: asyncHandler(async (req, res) => {
@@ -38,8 +35,27 @@ const categoriesController = {
     const items = await getItems(req.params);
     res.render("category", { title: category, category, categories, items });
   }),
+  getCategoryEdit: asyncHandler(async (req, res) => {
+    console.log("getCategoryEdit running...");
+    console.log("req.url:", req.url);
+    console.log("req.params:", req.params);
+    const categories = await getCategories();
+    const { category } = req.params;
+    const input = { category };
+    const edit = true;
+    // Need to include category form
+    res.render("edit", { title: "Edit Category", categories, edit, input });
+  }),
   getCategoryDelete: asyncHandler(async (req, res) => {
-    console.log("postCategoryDelete running...");
+    console.log("getCategoryDelete running...");
+    console.log("req.url:", req.url);
+    console.log("req.params:", req.params);
+    const categories = await getCategories();
+    const { category } = req.params;
+    res.render("delete", { title: "Delete Category", categories });
+  }),
+  postCategoryEdit: asyncHandler(async (req, res) => {
+    console.log("postCategoryEdit running...");
     console.log("req.url:", req.url);
     console.log("req.query:", req.query);
     console.log("req.params:", req.params);

@@ -14,4 +14,5 @@ const openModalHandler = (e, category) => {
 
 const closeModal = (e) => {
   console.log("closeModal running...");
+  console.log(e);
 };

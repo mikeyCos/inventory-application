@@ -2,14 +2,15 @@ const { Router } = require("express");
 const {
   getCategoryItems,
   getCategories,
-  postCategoryDelete,
+  getCategoryEdit,
+  getCategoryDelete,
 } = require("../controllers/categoriesController");
 
 const categoriesRouter = new Router();
 
+categoriesRouter.get("/edit/:category", getCategoryEdit);
+categoriesRouter.get("/delete/:category", getCategoryDelete);
 categoriesRouter.get("/:category", getCategoryItems);
-categoriesRouter.get(["/", "/delete/confirm/:categoryID"], getCategories);
-// categoriesRouter.get('/delete/confirm', getCategoryDelete);
-categoriesRouter.post("/delete/:category", postCategoryDelete);
+categoriesRouter.get("/", getCategories);
 
 module.exports = categoriesRouter;

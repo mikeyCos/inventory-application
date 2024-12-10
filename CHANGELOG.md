@@ -1,5 +1,11 @@
 # Changelog
 ---
+### 19 DEC 2924
+- Replaced edit and delete button elements with anchor elements.
+- Edit and delete anchor elements now route to a edit or delete page.
+- Moved `categories.css` from `categories.ejs` page into the `head.ejs` partial.
+- The category edit page will render a form with `action="/edit/category"` and a password input.
+---
 ### 09 DEC 2024
 - Corrected date of previous log from `05 NOV 2024` to `06 DEC 2024`.
 - Clicking a button when the modal is open appends to the current URL string; for example, `/categories/delete/confirm/categories/delete/confirm/2?modal=open`.

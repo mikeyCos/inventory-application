@@ -5,12 +5,8 @@
         <li>
           <a href="/category/<%= categoryObj.category %>"><%= categoryObj.category %></a>
           <% if (locals.delete && categoryObj.category !== 'unassigned') { %>
-              <form action="categories/delete/confirm/<%= categoryObj.id %>" method="get">
-
-
-                <button type="submit" name="modal" value="open">Open</button>
-                <button type="submit" name="modal" value="open">Open</button>
-              </form>
+          <a class="category-edit" href="category/edit/<%= categoryObj.category %>">EDIT</a>
+          <a class="category-edit" href="category/delete/<%= categoryObj.category %>">DELETE</a>
             <% } %>
         </li>
       <% }) %>

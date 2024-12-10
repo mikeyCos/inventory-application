@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <%- include('./head') %>
-
 <body>
   <%- include('./header') %>
   <main>
-    <section id="categories">
-      <%- include('../partials/categories', { categories, delete: true }) %>
+    <section id="edit-category">
+      <h1>EDIT</h1>
+      <%- include('./categoryForm') %>
     </section>
-    <%- include('../partials/modal') %>
   </main>
   <%- include('./footer') %>
 </body>
