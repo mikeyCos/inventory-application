@@ -1,6 +1,18 @@
 # Changelog
 ---
-### 19 DEC 2924
+###
+---
+### 11 DEC 2024
+- Corrected date of previous log from `19 DEC 2924` to `10 DEC 2024`.
+- Created edit controller and router.
+- Created delete controller and router.
+- Created `deleteCategory`, `deleteItem`, `editCategory`, and `editItem` pages.
+- A password input added for delete and edit pages.
+- Added additional `withMessage()` to `validateCategory` array in `addController` module.
+- Deleting a category or item will render disabled inputs.
+- Currently, editing or deleting an item do not populate the inputs with respective values.
+---
+### 10 DEC 2024
 - Replaced edit and delete button elements with anchor elements.
 - Edit and delete anchor elements now route to a edit or delete page.
 - Moved `categories.css` from `categories.ejs` page into the `head.ejs` partial.

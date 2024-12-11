@@ -14,8 +14,16 @@ const validateCategory = [
   body("category")
     .trim()
     .isLength({ min: 3, max: 20 })
+    .withMessage("Category must be between 3 and 20 characters long.")
     .isAlpha()
-    .withMessage("Category input must be between 3 and 20 letters long."),
+    .withMessage("Category must only contain letters."),
+  body("password")
+    .custom((value) => {
+      return value === "test";
+    })
+    .withMessage(
+      "A valid password must be entered to edit/delete this category."
+    ),
 ];
 
 const validateItem = [
@@ -70,6 +78,7 @@ const addController = {
 
       if (!errors.isEmpty()) {
         const categories = await getCategories();
+        console.log(errors);
         const localErrors = errors
           .array()
           .reduce((accumulator, currentError) => {

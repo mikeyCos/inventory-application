@@ -5,6 +5,8 @@ const indexRouter = require("./routes/indexRouter");
 const placeholderRouter = require("./routes/placeholderRouter");
 const categoriesRouter = require("./routes/categoriesRouter");
 const addRouter = require("./routes/addRouter");
+const editRouter = require("./routes/editRouter");
+const deleteRouter = require("./routes/deleteRouter");
 
 const app = express();
 
@@ -23,6 +25,8 @@ app.use("/", indexRouter);
 app.use("/placeholderA", placeholderRouter);
 app.use(["/category", "/categories"], categoriesRouter);
 app.use("/add", addRouter);
+app.use("/edit", editRouter);
+app.use("/delete", deleteRouter);
 
 app.use((req, res) => {
   res.render("404", { title: "404 - Page Not Found" });

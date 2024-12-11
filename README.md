@@ -153,6 +153,7 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 - [ ] Build a delete and edit confirmation modal.
   - [ ] Delete modal will have `confirm` and `cancel` buttons.
   - [ ] Edit modal will include a form with input content.
+- [ ] Build custom validator to check for duplicate categories and items.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
