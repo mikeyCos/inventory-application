@@ -29,14 +29,14 @@ const editController = {
     console.log("req.url:", req.url);
     console.log("req.params:", req.params);
     const categories = await getCategories();
-    const { category } = req.params;
-    const input = { category };
+    const item = await getItem(req.params);
+    console.log(item);
     const editItem = true;
     res.render("editItem", {
       title: "Edit Item",
       categories,
       editItem,
-      input,
+      inputs: { ...item },
     });
   }),
   postEditCategory: asyncHandler(async (req, res) => {

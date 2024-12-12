@@ -1,5 +1,6 @@
 const asyncHandler = require("express-async-handler");
 const {
+  getItem,
   getItems,
   getCategories,
   deleteCategory,
@@ -16,6 +17,8 @@ const deleteController = {
     const { category } = req.params;
     const input = { category };
     const deleteCategory = true;
+    // Need to update all items impacted to 'unassigned' category
+    // Need category id
     res.render("deleteCategory", {
       title: "Delete Category",
       categories,
@@ -28,8 +31,14 @@ const deleteController = {
     console.log("req.url:", req.url);
     console.log("req.params:", req.params);
     const categories = await getCategories();
+    const item = await getItem(req.params);
+    const category = await getCategory({ id: item.category_id });
+    console.log(category);
+    console.log(item);
     const deleteItem = true;
     // Need to populate the inputs
+    // Need item data
+    // Need category item is assigned to
     res.render("deleteItem", {
       title: "Delete Item",
       categories,

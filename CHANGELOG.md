@@ -1,6 +1,12 @@
 # Changelog
 ---
-###
+### 12 DEC 2024
+- The `getCategory` method in `queries` module now takes an `id` and returns the first item of the `rows` array.
+- The `getItem` method in `queries` module will return the first item of the `rows` array.
+- Added the `bail()` validator modifier for the category input.
+- Changed item label and input attributes' values, `for`/`id`/`name`, from `item` to `name`.
+- Going to an item's edit page will populate the inputs with the item's content.
+- Changed path parameters in `editRouter` and `deleteRouter` modules from `/:item` to `/:upc`.  
 ---
 ### 11 DEC 2024
 - Corrected date of previous log from `19 DEC 2924` to `10 DEC 2024`.

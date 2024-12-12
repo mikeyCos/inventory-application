@@ -4,35 +4,42 @@ const pool = require("./pool");
 
 const queries = {
   getCategories: async () => {
-    const { rows } = await pool.query(
+    const { rows: categories } = await pool.query(
       `
       SELECT * FROM categories;
       `
     );
 
-    return rows;
+    return categories;
   },
-  getCategory: async ({ category }) => {
-    const result = await pool.query(
+  getCategory: async ({ category, id }) => {
+    const {
+      rows: [categoryObj],
+    } = await pool.query(
       `
-      SELECT id FROM categories
-      WHERE category = LOWER($1);
+      SELECT * FROM categories
+      WHERE category = LOWER($1) OR id = $2;
       `,
-      [category]
+      [category, id]
     );
 
-    return result;
+    return categoryObj;
   },
   getItem: async ({ upc }) => {
-    const result = await pool.query(
+    // Performs a nested destructure to get the first item of the rows array
+    const {
+      rows: [item],
+    } = await pool.query(
       `
       SELECT * FROM items
+      LEFT JOIN categories
+      ON items.category_id = categories.id
       WHERE upc = $1;
       `,
       [upc]
     );
 
-    return result;
+    return item;
   },
   getItems: async ({ category }) => {
     const { rows } = await pool.query(
@@ -56,7 +63,7 @@ const queries = {
       [category]
     );
   },
-  insertItem: async ({ category, item, upc, quantity, price }) => {
+  insertItem: async ({ category, name, upc, quantity, price }) => {
     // What if item (based on UPC) already exists?
     // What if item (based on UPC) already exists and the category is different?
     // Need to assign the corresponding category id from the categories table
@@ -103,12 +110,12 @@ const queries = {
       INSERT INTO items (category_id, name, upc, quantity, price)
       VALUES ((SELECT id FROM categories WHERE category = LOWER($1)), $2, $3, $4, $5);
       `,
-      [category, item, upc, quantity, price]
+      [category, name, upc, quantity, price]
     );
 
     console.log("insertItem query completed...");
   },
-  updateItem: async ({ category, item, upc, quantity, price }) => {
+  updateItem: async ({ category, name, upc, quantity, price }) => {
     await pool.query(
       `
       UPDATE items
@@ -146,7 +153,9 @@ const queries = {
       [category]
     );
   },
-  deleteItem: async () => {},
+  deleteItem: async () => {
+    console.log("deleteItem running...");
+  },
 };
 
 module.exports = queries;

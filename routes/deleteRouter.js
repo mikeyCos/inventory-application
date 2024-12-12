@@ -9,6 +9,6 @@ const {
 const deleteRouter = new Router();
 
 deleteRouter.get("/category/:category", getDeleteCategory);
-deleteRouter.get("/item/:item", getDeleteItem);
+deleteRouter.get("/item/:upc", getDeleteItem);
 
 module.exports = deleteRouter;

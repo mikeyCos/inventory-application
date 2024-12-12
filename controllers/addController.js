@@ -15,9 +15,11 @@ const validateCategory = [
     .trim()
     .isLength({ min: 3, max: 20 })
     .withMessage("Category must be between 3 and 20 characters long.")
+    .bail()
     .isAlpha()
     .withMessage("Category must only contain letters."),
   body("password")
+    .optional()
     .custom((value) => {
       return value === "test";
     })
@@ -35,10 +37,10 @@ const validateItem = [
     .withMessage(
       "Category input is optional and the value will default to 'Unassigned'. However, the value must be between 3 and 20 letters long."
     ),
-  body("item")
+  body("name")
     .trim()
     .isLength({ min: 3, max: 30 })
-    .withMessage("Item input must be between 3 and 30 characters long."),
+    .withMessage("Item name input must be between 3 and 30 characters long."),
   body("upc")
     .trim()
     .isNumeric()
@@ -149,10 +151,10 @@ const addController = {
       try {
         // categoryExists and upcExists returns 0 or 1
         // 0 Indicates no result and 1 indicates existing result(s)
-        const { rowCount: categoryExists } = await getCategory(req.body);
-        const { rowCount: upcExists } = await getItem(req.body);
-        console.log(categoryExists);
-        console.log(upcExists);
+        const categoryExists = await getCategory(req.body);
+        const upcExists = await getItem(req.body);
+        console.log("categoryExists:", categoryExists);
+        console.log("upcExists:", upcExists);
 
         if (categoryExists && !upcExists) {
           console.log("category exists and upc does NOT exist");
@@ -182,7 +184,6 @@ const addController = {
         // res.redirect("/add/item");
         res.status(200).render("addItem", {
           title: "Add Item",
-          inputs: { ...req.body },
           categories,
         });
       } catch (err) {

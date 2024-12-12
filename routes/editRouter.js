@@ -9,6 +9,6 @@ const {
 const editRouter = new Router();
 
 editRouter.get("/category/:category", getEditCategory);
-editRouter.get("/item/:item", getEditItem);
+editRouter.get("/item/:upc", getEditItem);
 
 module.exports = editRouter;
