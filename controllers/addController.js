@@ -1,63 +1,13 @@
 const asyncHandler = require("express-async-handler");
-const { body, validationResult } = require("express-validator");
+const { validationResult } = require("express-validator");
 const {
   getCategories,
   getCategory,
-  getItem,
   insertCategory,
   insertItem,
-  updateItem,
 } = require("../db/queries");
-const foo = require("../db/queries");
-
-const validateCategory = [
-  body("category")
-    .trim()
-    .isLength({ min: 3, max: 20 })
-    .withMessage("Category must be between 3 and 20 characters long.")
-    .bail()
-    .isAlpha()
-    .withMessage("Category must only contain letters."),
-  body("password")
-    .optional()
-    .custom((value) => {
-      return value === "test";
-    })
-    .withMessage(
-      "A valid password must be entered to edit/delete this category."
-    ),
-];
-
-const validateItem = [
-  body("category")
-    .trim()
-    .default("Unassigned")
-    .isAlpha()
-    .isLength({ min: 3, max: 20 })
-    .withMessage(
-      "Category input is optional and the value will default to 'Unassigned'. However, the value must be between 3 and 20 letters long."
-    ),
-  body("name")
-    .trim()
-    .isLength({ min: 3, max: 30 })
-    .withMessage("Item name input must be between 3 and 30 characters long."),
-  body("upc")
-    .trim()
-    .isNumeric()
-    .isLength({ min: 10, max: 12 })
-    .escape()
-    .withMessage("UPC must be between 10 and 12 digits long."),
-  body("quantity")
-    .trim()
-    .isInt({ min: 0, max: 999999 })
-    .escape()
-    .withMessage("Quantity must be between 0 and 999,999."),
-  body("price")
-    .trim()
-    .isFloat({ min: 0.01, max: 999999 })
-    .escape()
-    .withMessage("Price must be between 0.01 and 999,999."),
-];
+const validateCategory = require("../validators/categoryValidator");
+const validateItem = require("../validators/itemValidator");
 
 const addController = {
   getAddCategory: asyncHandler(async (req, res) => {
@@ -67,15 +17,21 @@ const addController = {
     res.render("addCategory", {
       title: "Add Category",
       categories,
+      action: "add",
     });
   }),
   getAddItem: asyncHandler(async (req, res) => {
     const categories = await getCategories();
-    res.render("addItem", { title: "Add Item", categories });
+    res.render("addItem", {
+      title: "Add Item",
+      categories,
+      action: "add",
+    });
   }),
   postAddCategory: [
     validateCategory,
     asyncHandler(async (req, res) => {
+      console.log("postAddCategory running...");
       const errors = validationResult(req);
 
       if (!errors.isEmpty()) {
@@ -88,37 +44,23 @@ const addController = {
             return { ...accumulator, [path]: { value, msg } };
           }, {});
 
+        console.log(localErrors);
         return res.status(400).render("addCategory", {
           title: "Add Category",
           errors: { ...localErrors },
-          input: { ...req.body },
+          inputs: { ...req.body },
           categories,
+          action: "add",
         });
       }
 
-      const { category } = req.body;
-
-      try {
-        await insertCategory(req.body);
-        const categories = await getCategories();
-        res.render("addCategory", {
-          title: "Add Category",
-          categories,
-        });
-      } catch (err) {
-        const categories = await getCategories();
-        // Error code: 23505, duplicate unique constraint
-        return res.status(400).render("addCategory", {
-          title: "Add Category",
-          errors: {
-            category: {
-              msg: `The "${category}" category already exists.`,
-            },
-          },
-          input: { ...req.body },
-          categories,
-        });
-      }
+      await insertCategory(req.body);
+      const categories = await getCategories();
+      res.render("addCategory", {
+        title: "Add Category",
+        categories,
+        action: "add",
+      });
     }),
   ],
   postAddItem: [
@@ -143,57 +85,38 @@ const addController = {
           errors: { ...localErrors },
           inputs: { ...req.body },
           categories,
+          action: "add",
         });
       }
 
       console.log("postAddItem running...");
       console.log(req.body);
-      try {
-        // categoryExists and upcExists returns 0 or 1
-        // 0 Indicates no result and 1 indicates existing result(s)
-        const categoryExists = await getCategory(req.body);
-        const upcExists = await getItem(req.body);
-        console.log("categoryExists:", categoryExists);
-        console.log("upcExists:", upcExists);
 
-        if (categoryExists && !upcExists) {
-          console.log("category exists and upc does NOT exist");
-          // Insert item
-          await insertItem(req.body);
-        } else if (!categoryExists && upcExists) {
-          console.log("category does NOT exist and upc exists");
-          // Insert category
-          // Update item
-          // await insertCategory(req.body);
-          // await foo.updateItem(req.body);
-          // Redirect user to an update page?
-        } else if (categoryExists && upcExists) {
-          console.log("category and upc both exist");
-          // Update item
-          // await foo.updateItem(req.body);
-          // Redirect user to an update page?
-        } else {
-          console.log("category and upc both do NOT exist");
-          // Insert category
-          // Insert item
-          await insertCategory(req.body);
-          await insertItem(req.body);
-        }
+      // categoryExists returns a category object or undefined
+      // Do I need a try...catch block here?
+      const categoryExists = await getCategory(req.body);
+      console.log("categoryExists:", categoryExists);
 
-        // How to let the user know the item was successfully added?
-        // res.redirect("/add/item");
-        res.status(200).render("addItem", {
-          title: "Add Item",
-          categories,
-        });
-      } catch (err) {
-        console.log("err:");
-        console.log(err);
-        return res.status(400).render("addItem", {
-          title: "Add Item",
-          inputs: { ...req.body },
-        });
+      if (categoryExists) {
+        console.log("category exists");
+        // Insert item
+        // await insertItem(req.body);
+      } else {
+        console.log("category does not exist");
+        // Insert category
+        // Insert item
+        // await insertCategory(req.body);
+        // await insertItem(req.body);
       }
+
+      // How to let the user know the item was successfully added?
+      // res.redirect("/add/item");
+      res.status(200).render("addItem", {
+        title: "Add Item",
+        categories,
+        inputs: { ...req.body },
+        action: "add",
+      });
     }),
   ],
 };

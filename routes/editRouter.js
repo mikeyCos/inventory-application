@@ -10,5 +10,7 @@ const editRouter = new Router();
 
 editRouter.get("/category/:category", getEditCategory);
 editRouter.get("/item/:upc", getEditItem);
+editRouter.post("/category/:category", postEditCategory);
+editRouter.post("/item/:upc", postEditItem);
 
 module.exports = editRouter;

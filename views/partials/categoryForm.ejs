@@ -1,59 +1,23 @@
-<% if (locals.editCategory) { %>
-  <form action="/edit/category" method="post">
-    <h2>Edit Category</h2>
-    <ul>
-      <li>
-        <label for="category">Category</label>
-        <input id="category" name="category" type="text" value="<%= locals.input ? input.category : '' %>">
-        <% if (locals.errors?.category) { %>
-          <p><%= errors.category.msg %></p>
-        <% } %>
-      </li>
-      <li>
-        <label for="password">Password</label>
-        <input id="password" name="password" type="password" value="<%= locals.input ? input.password : '' %>" required>
-        <% if (locals.errors?.password) { %>
-          <p><%= errors.password.msg %></p>
-        <% } %>
-      </li>
-    </ul>
-    <button type="submit">Save Category</button>
-  </form>
-  
-<% } else if (locals.deleteCategory) { %>
-  <form action="/delete/category" method="post">
-    <h2>Delete Category</h2>
-    <ul>
-      <li>
-        <label for="category">Category</label>
-        <input id="category" name="category" type="text" value="<%= locals.input?.category ?? '' %>" disabled>
-        <% if (locals.errors?.category) { %>
-          <p><%= errors.category.msg %></p>
-        <% } %>
-      </li>
-      <li>
-        <label for="password">Password</label>
-        <input id="password" name="password" type="password" value="<%= locals.input ? input.password : '' %>" required>
-        <% if (locals.errors?.password) { %>
-          <p><%= errors.password.msg %></p>
-        <% } %>
-      </li>
-    </ul>
-    <button type="submit">Delete Category</button>
-  </form>
-<% } else { %>
-  <form action="/add/category" method="post">
-    <h2>Add Category</h2>
-    <ul>
-      <li>
-        <label for="category">Category</label>
-        <input id="category" name="category" type="text" value="<%= locals.input?.category ?? '' %>">
-        <% if (locals.errors?.category) { %>
-          <p><%= errors.category.msg %></p>
-        <% } %>
-      </li>
-    </ul>
-    <button type="submit">Add Category</button>
-  </form>
-<% } %>
+<form action="/<%= action %>/category<%= locals.password ? '/' + locals.inputs.category : ''%>" method="post">
+  <h2><%= action %> Category</h2>
+  <ul>
+    <li>
+      <label for="category">Category</label>
+      <input id="category" name="category" type="text" value="<%= locals.inputs?.category ?? '' %>" <%= locals.action === 'delete' ? readonly : '' %>>
+      <% if (locals.errors?.category) { %>
+        <p><%= errors.category.msg %></p>
+      <% } %>
+    </li>
 
+    <% if (locals.password) { %>
+      <li>
+        <label for="password">Password</label>
+        <input id="password" name="password" type="password">
+        <% if (locals.errors?.password) { %>
+          <p><%= errors.password.msg %></p>
+        <% } %>
+      </li>
+    <% } %>
+  </ul>
+  <button type="submit"><%= action %> Category</button>
+</form>

@@ -1,5 +1,21 @@
 # Changelog
 ---
+### 13 DEC 2024
+- Created a custom validator for the `category` input and removed `try...catch` block from `postAddCategory` method in `addController.js` module. The custom validator throws an error if the category exists.
+- Created `validators` subdirectory.
+- Created `categoryValidator`, `itemValidator`, and `passwordValidator` modules.
+- Removed `try...catch` block from `postAddItem` method in `addController.js` module.
+- Removed `upcExists` variable from `postAddItem` method in `addController.js` module.
+- A conditional block in `postAddItem` method in `addController.js` module now depends on the `categoryExists` variable.
+- Removed conditional blocks from form partials.
+- Form partials additionally use `action` and `password` local variables.
+- Standardized a `inputs` local variable for form partials.
+- Currently, delete and edit post requests do nothing.
+- Password input no longer has the `value` attribute.
+- Changed `disabled` attribute to `readonly` for delete forms' inputs.
+- Initialized `success` page.
+- Adding and editing items/categories use the same validators; editing items/categories need to allow existing UPC and category values.
+---
 ### 12 DEC 2024
 - The `getCategory` method in `queries` module now takes an `id` and returns the first item of the `rows` array.
 - The `getItem` method in `queries` module will return the first item of the `rows` array.
@@ -54,7 +70,7 @@
 ### 26 NOV 2024
 - Currently, adding an item where the category exists or does not exist and the UPC does exists will update the existing item based on the UPC.
 - Navigating to a category will render items assigned to it's respective category.
-- Renamed `rowCount` property for `getCategory` and `getItem` resulting objects to ``categoryExists` and `upcExists` respectively.
+- Renamed `rowCount` property for `getCategory` and `getItem` resulting objects to `categoryExists` and `upcExists` respectively.
 - Created `getCategory`, `getItem`, and `updateItem` query methods in `queries` module. 
 - Deleted `item.ejs` and `itemPreview.ejs` files.
 - Attempted implementing `IF...ELSE IF` for the `insertItem` query.
