@@ -21,8 +21,11 @@ const validateItem = [
     .escape()
     .withMessage("UPC must be between 10 and 12 digits long.")
     .bail()
-    .custom(async (value) => {
+    .custom(async (value, { req }) => {
+      if (req.body.password !== undefined) return;
+
       const item = await getItem({ upc: value });
+
       if (item) {
         throw new Error(
           "This UPC already exists; change UPC or edit existing item."

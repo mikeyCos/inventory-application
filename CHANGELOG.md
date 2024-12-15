@@ -1,5 +1,12 @@
 # Changelog
 ---
+### 16 DEC 2024
+- 
+---
+### 15 DEC 2024
+- Fixed rendering `deleteItem` and `deleteCategory` pages.
+- An item can be deleted on the `deleteItem` page, but rerenders to the current page.
+---
 ### 13 DEC 2024
 - Created a custom validator for the `category` input and removed `try...catch` block from `postAddCategory` method in `addController.js` module. The custom validator throws an error if the category exists.
 - Created `validators` subdirectory.

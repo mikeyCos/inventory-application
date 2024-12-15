@@ -115,6 +115,7 @@ const queries = {
 
     console.log("insertItem query completed...");
   },
+  updateCategory: async ({ category, newCategory }) => {},
   updateItem: async ({ category, name, upc, quantity, price }) => {
     await pool.query(
       `
@@ -122,25 +123,30 @@ const queries = {
       SET category_id = (SELECT id FROM categories WHERE category = LOWER($1)), name = $2, upc = $3, quantity = $4, price = $5
       WHERE upc = $3;
       `,
-      [category, item, upc, quantity, price]
+      [category, name, upc, quantity, price]
     );
   },
-  updateItems: async ({ category }) => {
+  updateItems: async ({ category, newCategory = "unassigned" }) => {
     console.log("updateItems running...");
-    // Change category for all items of category to 'unassigned'
+    // Change category for all items of category to newCategory
+    // newCategory defaults to 'unassigned'
     /* 
     SELECT * FROM items
     INNER JOIN categories
     ON items.category_id = categories.id;
     */
-    await pool.query(
+
+    console.log("category:", category);
+    console.log("newCategory:", newCategory);
+
+    /* await pool.query(
       `
       UPDATE items
-      SET category_id = (SELECT id FROM categories WHERE category = 'unassigned') 
+      SET category_id = (SELECT id FROM categories WHERE category = $2) 
       WHERE (SELECT id FROM categories WHERE category = LOWER($1)) = category_id;
       `,
-      [category]
-    );
+      [category, newCategory]
+    ); */
   },
   deleteCategory: async ({ category }) => {
     console.log("deleteCategory running...");
@@ -153,8 +159,17 @@ const queries = {
       [category]
     );
   },
-  deleteItem: async () => {
-    console.log("deleteItem running...");
+  deleteItem: async ({ upc }) => {
+    console.log("deleteItem query running...");
+    console.log("upc:", upc);
+
+    await pool.query(
+      `
+      DELETE FROM items
+      WHERE upc = $1
+      `,
+      [upc]
+    );
   },
 };
 

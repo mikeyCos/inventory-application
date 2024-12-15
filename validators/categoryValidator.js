@@ -11,6 +11,7 @@ const validateCategory = [
     .withMessage("Category must only contain letters.")
     .bail()
     .custom(async (value) => {
+      console.log("validateCategory running...");
       // Is it okay to 'define' an object in a function call?
       const category = await getCategory({ category: value });
       if (category) {
@@ -18,5 +19,4 @@ const validateCategory = [
       }
     }),
 ];
-
 module.exports = validateCategory;

@@ -145,7 +145,7 @@
   <ul>
     <li>
       <label for="category">Category</label>
-      <input id="category" name="category" type="text" value="<%= locals.inputs ? inputs.category: 'Unassigned' %>" <%= locals.action === 'delete' ? readonly : '' %>>
+      <input id="category" name="category" type="text" value="<%= locals.inputs ? inputs.category: 'Unassigned' %>" <%= locals.action === 'delete' ? "readonly" : '' %>>
       <% if (locals.errors?.category) { %>
         <p><%= errors.category.msg %></p>
       <% } %>
@@ -153,7 +153,7 @@
 
     <li>
       <label for="name">Item Name:</label>
-      <input id="name" name="name" type="text" value="<%= locals.inputs ? inputs.name: '' %>" <%= locals.action === 'delete' ? readonly="readonly" : '' %>>
+      <input id="name" name="name" type="text" value="<%= locals.inputs ? inputs.name: '' %>" <%= locals.action === 'delete' ? "readonly" : '' %>>
       <% if (locals.errors?.name) { %>
         <p><%= errors.name.msg %></p>
       <% } %>
@@ -161,7 +161,7 @@
 
     <li>
       <label for="upc">UPC:</label>
-      <input id="upc" name="upc" inputmode="numeric" oninput="this.value = this.value.replace(/\D+/g, '')" value="<%= locals.inputs ? inputs.upc: '' %>" <%= locals.action === 'delete' ? readonly="readonly" : '' %>>
+      <input id="upc" name="upc" inputmode="numeric" oninput="this.value = this.value.replace(/\D+/g, '')" value="<%= locals.inputs ? inputs.upc: '' %>" <%= locals.action === 'delete' ? "readonly" : '' %>>
       <% if (locals.errors?.upc) { %>
         <p><%= errors.upc.msg %></p>
       <% } %>
@@ -169,7 +169,7 @@
     
     <li>
       <label for="quantity">Quantity</label>
-      <input id="quantity" name="quantity" type="number" value="<%= locals.inputs ? inputs.quantity: '' %>" <%= locals.action === 'delete' ? readonly="readonly" : '' %>>
+      <input id="quantity" name="quantity" type="number" value="<%= locals.inputs ? inputs.quantity: '' %>" <%= locals.action === 'delete' ? "readonly" : '' %>>
       <% if (locals.errors?.quantity) { %>
         <p><%= errors.quantity.msg %></p>
       <% } %>
@@ -177,7 +177,7 @@
     
     <li>
       <label for="price">Unit price:</label>
-      <input id="price" name="price" type="number" step="0.01" value="<%= locals.inputs ? inputs.price: '' %>" <%= locals.action === 'delete' ? readonly="readonly" : '' %>>
+      <input id="price" name="price" type="number" step="0.01" value="<%= locals.inputs ? inputs.price: '' %>" <%= locals.action === 'delete' ? "readonly": '' %>>
       <% if (locals.errors?.price) { %>
         <p><%= errors.price.msg %></p>
       <% } %>

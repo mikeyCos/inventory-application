@@ -7,6 +7,7 @@ const categoriesRouter = require("./routes/categoriesRouter");
 const addRouter = require("./routes/addRouter");
 const editRouter = require("./routes/editRouter");
 const deleteRouter = require("./routes/deleteRouter");
+const { getCategories } = require("./db/queries");
 
 const app = express();
 
@@ -28,8 +29,10 @@ app.use("/add", addRouter);
 app.use("/edit", editRouter);
 app.use("/delete", deleteRouter);
 
-app.use((req, res) => {
-  res.render("404", { title: "404 - Page Not Found" });
+app.use(async (req, res) => {
+  console.log("404");
+  const categories = await getCategories();
+  res.render("404", { title: "404 - Page Not Found", categories });
 });
 
 // Error middleware function

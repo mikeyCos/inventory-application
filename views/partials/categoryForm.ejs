@@ -3,7 +3,7 @@
   <ul>
     <li>
       <label for="category">Category</label>
-      <input id="category" name="category" type="text" value="<%= locals.inputs?.category ?? '' %>" <%= locals.action === 'delete' ? readonly : '' %>>
+      <input id="category" name="category" type="text" value="<%= locals.inputs?.category ?? '' %>" <%= locals.action === 'delete' ? 'readonly' : '' %>>
       <% if (locals.errors?.category) { %>
         <p><%= errors.category.msg %></p>
       <% } %>

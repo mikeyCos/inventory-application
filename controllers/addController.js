@@ -56,6 +56,8 @@ const addController = {
 
       await insertCategory(req.body);
       const categories = await getCategories();
+      // Need to rerender add category page with no inputs
+      // Render successful message
       res.render("addCategory", {
         title: "Add Category",
         categories,
@@ -100,7 +102,7 @@ const addController = {
       if (categoryExists) {
         console.log("category exists");
         // Insert item
-        // await insertItem(req.body);
+        await insertItem(req.body);
       } else {
         console.log("category does not exist");
         // Insert category
@@ -109,8 +111,8 @@ const addController = {
         // await insertItem(req.body);
       }
 
-      // How to let the user know the item was successfully added?
-      // res.redirect("/add/item");
+      // Need to rerender add item page with no inputs
+      // Render successful message
       res.status(200).render("addItem", {
         title: "Add Item",
         categories,

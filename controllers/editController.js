@@ -6,6 +6,7 @@ const {
   getCategories,
   deleteCategory,
   updateItems,
+  updateItem,
   getCategory,
 } = require("../db/queries");
 const validateCategory = require("../validators/categoryValidator");
@@ -52,7 +53,7 @@ const editController = {
 
       if (!errors.isEmpty()) {
         const categories = await getCategories();
-        console.log(errors);
+        console.log("errors:", errors);
         const localErrors = errors
           .array()
           .reduce((accumulator, currentError) => {
@@ -60,7 +61,7 @@ const editController = {
             return { ...accumulator, [path]: { value, msg } };
           }, {});
 
-        console.log(localErrors);
+        console.log("localErrors:", localErrors);
         return res.status(400).render("editCategory", {
           title: "Edit Category",
           errors: { ...localErrors },
@@ -71,8 +72,12 @@ const editController = {
         });
       }
 
-      // await insertCategory(req.body);
+      // Update existing category with new category
+      // Need to update all impacted items with new category
+
       const categories = await getCategories();
+      // Need to rerender add edit category page with inputs
+      // Render successful message
       res.render("editCategory", {
         title: "Edit Category",
         categories,
@@ -110,8 +115,23 @@ const editController = {
         });
       }
 
-      // await insertCategory(req.body);
+      const categoryExists = await getCategory(req.body);
+      console.log("categoryExists:", categoryExists);
+
+      if (categoryExists) {
+        console.log("category exists");
+        // Insert item
+        // await insertItem(req.body);
+      } else {
+        console.log("category does not exist");
+        // Insert category
+        // Insert item
+        // await insertCategory(req.body);
+        // await insertItem(req.body);
+      }
       const categories = await getCategories();
+      // Need to rerender add edit item page with inputs
+      // Render successful message
       res.render("editItem", {
         title: "Edit Item",
         categories,
