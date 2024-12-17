@@ -9,7 +9,7 @@ const {
 const deleteRouter = new Router();
 
 deleteRouter.get("/category/:category", getDeleteCategory);
-deleteRouter.get("/item/:upc", getDeleteItem);
+deleteRouter.get("/item/:upc/:category", getDeleteItem);
 deleteRouter.post("/category/:category", postDeleteCategory);
 deleteRouter.post("/item/:upc", postDeleteItem);
 

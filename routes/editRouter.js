@@ -9,7 +9,7 @@ const {
 const editRouter = new Router();
 
 editRouter.get("/category/:category", getEditCategory);
-editRouter.get("/item/:upc", getEditItem);
+editRouter.get("/item/:upc/:category", getEditItem);
 editRouter.post("/category/:category", postEditCategory);
 editRouter.post("/item/:upc", postEditItem);
 

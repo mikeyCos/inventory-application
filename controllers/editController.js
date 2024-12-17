@@ -3,8 +3,8 @@ const { validationResult } = require("express-validator");
 const {
   getItem,
   getItems,
-  getCategories,
   deleteCategory,
+  updateCategory,
   updateItems,
   updateItem,
   getCategory,
@@ -18,12 +18,10 @@ const editController = {
     console.log("getEditCategory running...");
     console.log("req.url:", req.url);
     console.log("req.params:", req.params);
-    const categories = await getCategories();
     const { category } = req.params;
-    // const editCategory = true;
+
     res.render("editCategory", {
       title: "Edit Category",
-      categories,
       inputs: { category },
       password: true,
       action: "edit",
@@ -33,12 +31,11 @@ const editController = {
     console.log("getEditItem running...");
     console.log("req.url:", req.url);
     console.log("req.params:", req.params);
-    const categories = await getCategories();
     const item = await getItem(req.params);
     console.log(item);
+
     res.render("editItem", {
       title: "Edit Item",
-      categories,
       inputs: { ...item },
       password: true,
       action: "edit",
@@ -50,9 +47,8 @@ const editController = {
     asyncHandler(async (req, res) => {
       console.log("postEditCategory running...");
       const errors = validationResult(req);
-
+      const { category } = req.params;
       if (!errors.isEmpty()) {
-        const categories = await getCategories();
         console.log("errors:", errors);
         const localErrors = errors
           .array()
@@ -66,21 +62,25 @@ const editController = {
           title: "Edit Category",
           errors: { ...localErrors },
           inputs: { ...req.body },
-          categories,
           password: true,
           action: "edit",
+          category,
         });
       }
 
+      // How to reference original category?
+      // If password is incorrect, the original category is lost
+      const { category: newCategory } = req.body;
+      console.log(category);
+      console.log(newCategory);
+      await updateCategory({ prevCategory: category, newCategory });
       // Update existing category with new category
       // Need to update all impacted items with new category
-
-      const categories = await getCategories();
+      // await updateCategory({ category, newCategory })
       // Need to rerender add edit category page with inputs
       // Render successful message
       res.render("editCategory", {
         title: "Edit Category",
-        categories,
         inputs: { ...req.body },
         password: true,
         action: "edit",
@@ -95,7 +95,6 @@ const editController = {
       const errors = validationResult(req);
 
       if (!errors.isEmpty()) {
-        const categories = await getCategories();
         console.log(errors);
         const localErrors = errors
           .array()
@@ -109,7 +108,6 @@ const editController = {
           title: "Edit Item",
           errors: { ...localErrors },
           inputs: { ...req.body },
-          categories,
           password: true,
           action: "edit",
         });
@@ -129,12 +127,10 @@ const editController = {
         // await insertCategory(req.body);
         // await insertItem(req.body);
       }
-      const categories = await getCategories();
       // Need to rerender add edit item page with inputs
       // Render successful message
       res.render("editItem", {
         title: "Edit Item",
-        categories,
         inputs: { ...req.body },
         password: true,
         action: "edit",

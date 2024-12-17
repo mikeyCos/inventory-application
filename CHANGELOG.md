@@ -1,7 +1,13 @@
 # Changelog
 ---
-### 16 DEC 2024
+### 17 DEC 2024
 - 
+---
+### 16 DEC 2024
+- Created application-level middleware in `app.js` module that creates a `categories` object in `res.locals`.
+- Moved methods out of `queries` object and defined them as individual named arrow functions in the `queries.js` module.
+- Changed edit and delete get paths; for example, `delete/item/:upc` to `delete/item/:upc/:category`.
+- Created temporary `queriesBackup.js` module.
 ---
 ### 15 DEC 2024
 - Fixed rendering `deleteItem` and `deleteCategory` pages.

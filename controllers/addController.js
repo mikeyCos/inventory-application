@@ -13,18 +13,14 @@ const addController = {
   getAddCategory: asyncHandler(async (req, res) => {
     console.log("getAddCategory running...");
     console.log("req.originalUrl:", req.originalUrl);
-    const categories = await getCategories();
     res.render("addCategory", {
       title: "Add Category",
-      categories,
       action: "add",
     });
   }),
   getAddItem: asyncHandler(async (req, res) => {
-    const categories = await getCategories();
     res.render("addItem", {
       title: "Add Item",
-      categories,
       action: "add",
     });
   }),
@@ -35,7 +31,6 @@ const addController = {
       const errors = validationResult(req);
 
       if (!errors.isEmpty()) {
-        const categories = await getCategories();
         console.log(errors);
         const localErrors = errors
           .array()
@@ -49,18 +44,15 @@ const addController = {
           title: "Add Category",
           errors: { ...localErrors },
           inputs: { ...req.body },
-          categories,
           action: "add",
         });
       }
 
       await insertCategory(req.body);
-      const categories = await getCategories();
       // Need to rerender add category page with no inputs
       // Render successful message
       res.render("addCategory", {
         title: "Add Category",
-        categories,
         action: "add",
       });
     }),
@@ -69,7 +61,6 @@ const addController = {
     validateItem,
     asyncHandler(async (req, res) => {
       const errors = validationResult(req);
-      const categories = await getCategories();
       console.log("req.body:", req.body);
       if (!errors.isEmpty()) {
         const localErrors = errors
@@ -86,7 +77,6 @@ const addController = {
           title: "Add Item",
           errors: { ...localErrors },
           inputs: { ...req.body },
-          categories,
           action: "add",
         });
       }
@@ -115,7 +105,6 @@ const addController = {
       // Render successful message
       res.status(200).render("addItem", {
         title: "Add Item",
-        categories,
         inputs: { ...req.body },
         action: "add",
       });
