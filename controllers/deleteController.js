@@ -6,7 +6,6 @@ const {
   getCategories,
   deleteCategory,
   deleteItem,
-  updateItems,
   getCategory,
 } = require("../db/queries");
 const validatePassword = require("../validators/passwordValidator");
@@ -26,6 +25,7 @@ const deleteController = {
       inputs: { category },
       password: true,
       action: "delete",
+      path: `delete/category/${category}`,
     });
   }),
   getDeleteItem: asyncHandler(async (req, res) => {
@@ -33,17 +33,18 @@ const deleteController = {
     console.log("req.url:", req.url);
     console.log("req.params:", req.params);
     const item = await getItem(req.params);
-    const category = await getCategory({ id: item.category_id });
-    console.log("category:", category);
+    // const category = await getCategory({ id: item.category_id });
     console.log("item:", item);
     // Need to populate the inputs
     // Need item data
     // Need category item is assigned to
+    const { category, upc } = req.params;
     res.render("deleteItem", {
       title: "Delete Item",
+      inputs: { ...item },
       password: true,
       action: "delete",
-      inputs: { ...item },
+      path: `delete/item/${upc}/${category}`,
     });
   }),
   postDeleteCategory: [
@@ -55,7 +56,7 @@ const deleteController = {
       console.log("req.params:", req.params);
       console.log("req.body:", req.body);
       const errors = validationResult(req);
-
+      const { category } = req.params;
       if (!errors.isEmpty()) {
         const localErrors = errors
           .array()
@@ -70,19 +71,16 @@ const deleteController = {
           inputs: { ...req.body },
           password: true,
           action: "delete",
+          path: `delete/category/${category}`,
         });
       }
 
       // Need to delete category
       // Need to update all impacted items with new category
-      const { category } = req.params;
-      // await updateItems({ category });
+      await deleteCategory({ category });
       // Need to go back to the categories page
       // Render successful message
-      res.render("categories", {
-        title: "Categories",
-      });
-
+      res.redirect("/");
       /* res.render("deleteCategory", {
         title: "Delete Category",
         categories,
@@ -101,7 +99,7 @@ const deleteController = {
       console.log("req.params:", req.params);
       console.log("req.body:", req.body);
       const errors = validationResult(req);
-
+      const { category, upc } = req.params;
       if (!errors.isEmpty()) {
         const localErrors = errors
           .array()
@@ -114,17 +112,15 @@ const deleteController = {
           title: "Delete Item",
           errors: { ...localErrors },
           inputs: { ...req.body },
-          categories,
           password: true,
           action: "delete",
+          path: `delete/item/${upc}/${category}`,
         });
       }
-      // await deleteItem(req.body);
-      const { category } = req.body;
+      await deleteItem(req.body);
       // Need to go back to category page
       // Render successful message
-      const items = await getItems(req.params);
-      res.render("category", { title: category, category, items });
+      res.redirect("/");
 
       /* res.render("deleteItem", {
         title: "Delete Item",

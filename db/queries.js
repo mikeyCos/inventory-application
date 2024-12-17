@@ -27,6 +27,7 @@ const getCategory = async ({ category, id }) => {
 
 const getItem = async ({ upc }) => {
   // Performs a nested destructure to get the first item of the rows array
+  console.log("getItem query running...");
   const {
     rows: [item],
   } = await pool.query(
@@ -122,17 +123,14 @@ const insertItem = async ({ category, name, upc, quantity, price }) => {
 const updateCategory = async ({ prevCategory, newCategory }) => {
   console.log("updateCategory running...");
   // Update existing category with new category
-  /* await pool.query(
+  await pool.query(
     `
       UPDATE categories
       SET category = $2
       WHERE category = $1
     `,
-    [category, newCategory]
-  ); */
-
-  // Update all items in old category with new category
-  await updateItems({ prevCategory, newCategory });
+    [prevCategory, newCategory]
+  );
 };
 
 const updateItem = async ({
@@ -146,19 +144,27 @@ const updateItem = async ({
 }) => {
   // What if category is new?
   // What if upc is new?
-  await pool.query(
+  console.log("updateItem query running...");
+  console.log("prevCategory:", prevCategory);
+  console.log("newCategory:", newCategory);
+  console.log("name:", name);
+  console.log("prevUPC:", prevUPC);
+  console.log("newUPC:", newUPC);
+  console.log("quantity:", quantity);
+  console.log("price:", price);
+  /* await pool.query(
     `
       UPDATE items
       SET category_id = (SELECT id FROM categories WHERE category = LOWER($2)), name = $3, upc = $5, quantity = $6, price = $7
       WHERE upc = $4;
       `,
     [prevCategory, newCategory, name, prevUPC, newUPC, quantity, price]
-  );
+  ); */
 };
 
 const updateItems = async ({ prevCategory, newCategory = "unassigned" }) => {
   console.log("updateItems running...");
-  // Change category for all items of category to newCategory
+  // Update category for all items of category to newCategory
   // newCategory defaults to 'unassigned'
   /* 
     SELECT * FROM items
@@ -166,17 +172,17 @@ const updateItems = async ({ prevCategory, newCategory = "unassigned" }) => {
     ON items.category_id = categories.id;
     */
 
-  console.log("category:", category);
+  console.log("category:", prevCategory);
   console.log("newCategory:", newCategory);
 
-  /* await pool.query(
-      `
+  await pool.query(
+    `
       UPDATE items
-      SET category_id = (SELECT id FROM categories WHERE category = $2) 
-      WHERE (SELECT id FROM categories WHERE category = LOWER($1)) = category_id;
+      SET category_id = (SELECT id FROM categories WHERE category = $1) 
+      WHERE NOT EXISTS (SELECT 1 FROM categories WHERE categories.id = items.category_id);
       `,
-      [category, newCategory]
-    ); */
+    [newCategory]
+  );
 };
 
 const deleteCategory = async ({ category }) => {
@@ -189,6 +195,8 @@ const deleteCategory = async ({ category }) => {
       `,
     [category]
   );
+
+  await updateItems({ prevCategory: category });
 };
 
 const deleteItem = async ({ upc }) => {
@@ -214,7 +222,6 @@ module.exports = {
   insertItem,
   updateCategory,
   updateItem,
-  updateItems,
   deleteCategory,
   deleteItem,
 };

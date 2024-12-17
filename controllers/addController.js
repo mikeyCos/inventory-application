@@ -16,12 +16,14 @@ const addController = {
     res.render("addCategory", {
       title: "Add Category",
       action: "add",
+      path: "add/category",
     });
   }),
   getAddItem: asyncHandler(async (req, res) => {
     res.render("addItem", {
       title: "Add Item",
       action: "add",
+      path: "add/item",
     });
   }),
   postAddCategory: [
@@ -45,16 +47,19 @@ const addController = {
           errors: { ...localErrors },
           inputs: { ...req.body },
           action: "add",
+          path: "add/category",
         });
       }
 
       await insertCategory(req.body);
       // Need to rerender add category page with no inputs
       // Render successful message
-      res.render("addCategory", {
+      /* res.render("addCategory", {
         title: "Add Category",
         action: "add",
-      });
+        path: "add/category",
+      }); */
+      res.redirect("/");
     }),
   ],
   postAddItem: [
@@ -78,6 +83,7 @@ const addController = {
           errors: { ...localErrors },
           inputs: { ...req.body },
           action: "add",
+          path: "add/item",
         });
       }
 
@@ -103,11 +109,13 @@ const addController = {
 
       // Need to rerender add item page with no inputs
       // Render successful message
-      res.status(200).render("addItem", {
+      /* res.status(200).render("addItem", {
         title: "Add Item",
         inputs: { ...req.body },
         action: "add",
-      });
+        path: "add/item",
+      }); */
+      res.redirect("/");
     }),
   ],
 };

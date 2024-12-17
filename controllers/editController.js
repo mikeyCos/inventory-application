@@ -5,7 +5,6 @@ const {
   getItems,
   deleteCategory,
   updateCategory,
-  updateItems,
   updateItem,
   getCategory,
 } = require("../db/queries");
@@ -19,12 +18,13 @@ const editController = {
     console.log("req.url:", req.url);
     console.log("req.params:", req.params);
     const { category } = req.params;
-
+    console.log(`edit/category/${category}`);
     res.render("editCategory", {
       title: "Edit Category",
       inputs: { category },
       password: true,
       action: "edit",
+      path: `edit/category/${category}`,
     });
   }),
   getEditItem: asyncHandler(async (req, res) => {
@@ -34,11 +34,13 @@ const editController = {
     const item = await getItem(req.params);
     console.log(item);
 
+    const { upc, category } = req.params;
     res.render("editItem", {
       title: "Edit Item",
       inputs: { ...item },
       password: true,
       action: "edit",
+      path: `edit/item/${upc}/${category}`,
     });
   }),
   postEditCategory: [
@@ -64,27 +66,23 @@ const editController = {
           inputs: { ...req.body },
           password: true,
           action: "edit",
+          path: `edit/category/${category}`,
           category,
         });
       }
 
-      // How to reference original category?
-      // If password is incorrect, the original category is lost
       const { category: newCategory } = req.body;
-      console.log(category);
-      console.log(newCategory);
       await updateCategory({ prevCategory: category, newCategory });
       // Update existing category with new category
-      // Need to update all impacted items with new category
-      // await updateCategory({ category, newCategory })
-      // Need to rerender add edit category page with inputs
       // Render successful message
-      res.render("editCategory", {
+      /* res.render("editCategory", {
         title: "Edit Category",
         inputs: { ...req.body },
         password: true,
         action: "edit",
-      });
+        path: `edit/category/${category}`,
+      }); */
+      res.redirect("/");
     }),
   ],
   postEditItem: [
@@ -93,6 +91,7 @@ const editController = {
     asyncHandler(async (req, res) => {
       console.log("postEditCategory running...");
       const errors = validationResult(req);
+      const { upc, category } = req.params;
 
       if (!errors.isEmpty()) {
         console.log(errors);
@@ -110,31 +109,14 @@ const editController = {
           inputs: { ...req.body },
           password: true,
           action: "edit",
+          path: `edit/item/${upc}/${category}`,
         });
       }
 
       const categoryExists = await getCategory(req.body);
       console.log("categoryExists:", categoryExists);
 
-      if (categoryExists) {
-        console.log("category exists");
-        // Insert item
-        // await insertItem(req.body);
-      } else {
-        console.log("category does not exist");
-        // Insert category
-        // Insert item
-        // await insertCategory(req.body);
-        // await insertItem(req.body);
-      }
-      // Need to rerender add edit item page with inputs
-      // Render successful message
-      res.render("editItem", {
-        title: "Edit Item",
-        inputs: { ...req.body },
-        password: true,
-        action: "edit",
-      });
+      res.redirect("/");
     }),
   ],
 };

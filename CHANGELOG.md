@@ -1,12 +1,20 @@
 # Changelog
 ---
-### 17 DEC 2024
+### 18 DEC 2024
 - 
+---
+### 17 DEC 2024
+- Created a `path` local variable for all `POST` methods; this ensures the original category or UPC can be referenced if a form fails validation.
+- Item and category form's `action` value is defined with the local variable `path`.
+- Changed `POST` route for deleting items from `/item/:upc` to `/item/:upc/:category`. 
+- All `POST` requests temporarily redirect to the root path.
+- Items and categories can be deleted when respective forms are successfully submitted.
+- Categories can be edited when the form is successfully submitted.
 ---
 ### 16 DEC 2024
 - Created application-level middleware in `app.js` module that creates a `categories` object in `res.locals`.
 - Moved methods out of `queries` object and defined them as individual named arrow functions in the `queries.js` module.
-- Changed edit and delete get paths; for example, `delete/item/:upc` to `delete/item/:upc/:category`.
+- Changed edit and delete `GET` paths; for example, `delete/item/:upc` to `delete/item/:upc/:category`.
 - Created temporary `queriesBackup.js` module.
 ---
 ### 15 DEC 2024
@@ -23,7 +31,7 @@
 - Removed conditional blocks from form partials.
 - Form partials additionally use `action` and `password` local variables.
 - Standardized a `inputs` local variable for form partials.
-- Currently, delete and edit post requests do nothing.
+- Currently, delete and edit `POST` requests do nothing.
 - Password input no longer has the `value` attribute.
 - Changed `disabled` attribute to `readonly` for delete forms' inputs.
 - Initialized `success` page.
@@ -60,7 +68,7 @@
 ---
 ### 05 DEC 2024
 - Created `categories.css` stylesheet.
-- Attempted send a get request by form buttons to render a opened modal.
+- Attempted send a `GET` request by form buttons to render a opened modal.
 - Currently, edit and delete buttons do not do anything.
 - Moved form elements next to the anchor element in the `categories` partial.
 ---
@@ -114,7 +122,7 @@
 - Clicking on a category revealed by hovering over `Shop By Category` will render the `category` view.
 - Temporarily commented out `include('./items')` in the `category` view.
 - Created and defined attributes for labels and inputs for `addItem` and `addRouter` views.
-- Added `post` route method to `addRouter`; submitting the category or item forms will use the `post` method.
+- Added `POST` route method to `addRouter`; submitting the category or item forms will use the `POST` method.
 ---
 ### 27 AUG 2024
 - Initial commit for `inventory-application` project.
