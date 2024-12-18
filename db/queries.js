@@ -11,7 +11,7 @@ const getCategories = async () => {
   return categories;
 };
 
-const getCategory = async ({ category, id }) => {
+const getCategory = async ({ category, category_id }) => {
   const {
     rows: [categoryObj],
   } = await pool.query(
@@ -19,7 +19,7 @@ const getCategory = async ({ category, id }) => {
       SELECT * FROM categories
       WHERE category = LOWER($1) OR id = $2;
       `,
-    [category, id]
+    [category, category_id]
   );
 
   return categoryObj;
@@ -28,6 +28,7 @@ const getCategory = async ({ category, id }) => {
 const getItem = async ({ upc }) => {
   // Performs a nested destructure to get the first item of the rows array
   console.log("getItem query running...");
+  console.log("upc:", upc);
   const {
     rows: [item],
   } = await pool.query(
@@ -134,46 +135,34 @@ const updateCategory = async ({ prevCategory, newCategory }) => {
 };
 
 const updateItem = async ({
-  prevCategory,
-  newCategory,
+  category,
   name,
-  prevUPC,
-  newUPC,
+  upc,
   quantity,
   price,
+  prevUPC,
 }) => {
-  // What if category is new?
-  // What if upc is new?
   console.log("updateItem query running...");
-  console.log("prevCategory:", prevCategory);
-  console.log("newCategory:", newCategory);
+  console.log("prevCategory:", category);
   console.log("name:", name);
-  console.log("prevUPC:", prevUPC);
-  console.log("newUPC:", newUPC);
+  console.log("upc:", upc);
   console.log("quantity:", quantity);
   console.log("price:", price);
+  console.log("prevUPC:", prevUPC);
   /* await pool.query(
     `
       UPDATE items
-      SET category_id = (SELECT id FROM categories WHERE category = LOWER($2)), name = $3, upc = $5, quantity = $6, price = $7
-      WHERE upc = $4;
+      SET category_id = (SELECT id FROM categories WHERE category = LOWER($1)), name = $2, upc = $3, quantity = $4, price = $5
+      WHERE upc = $6;
       `,
-    [prevCategory, newCategory, name, prevUPC, newUPC, quantity, price]
+    [category, name, upc, quantity, price, prevUPC]
   ); */
 };
 
 const updateItems = async ({ prevCategory, newCategory = "unassigned" }) => {
   console.log("updateItems running...");
-  // Update category for all items of category to newCategory
+  // Update category_id column for all items of category to newCategory
   // newCategory defaults to 'unassigned'
-  /* 
-    SELECT * FROM items
-    INNER JOIN categories
-    ON items.category_id = categories.id;
-    */
-
-  console.log("category:", prevCategory);
-  console.log("newCategory:", newCategory);
 
   await pool.query(
     `
@@ -185,9 +174,10 @@ const updateItems = async ({ prevCategory, newCategory = "unassigned" }) => {
   );
 };
 
-const deleteCategory = async ({ category }) => {
+const deleteCategory = async ({ category }, callback) => {
+  // Does passing updateItems function as a callback make this module more loosely coupled?
+  // If updateItems function was called directly here, will this make the module more tightly coupled?
   console.log("deleteCategory running...");
-
   await pool.query(
     `
       DELETE FROM categories
@@ -196,7 +186,7 @@ const deleteCategory = async ({ category }) => {
     [category]
   );
 
-  await updateItems({ prevCategory: category });
+  await callback({ prevCategory: category });
 };
 
 const deleteItem = async ({ upc }) => {
@@ -222,6 +212,7 @@ module.exports = {
   insertItem,
   updateCategory,
   updateItem,
+  updateItems,
   deleteCategory,
   deleteItem,
 };

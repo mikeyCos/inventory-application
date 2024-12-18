@@ -1,7 +1,22 @@
 # Changelog
 ---
-### 18 DEC 2024
+### 19 DEC 2024
 - 
+---
+### 18 DEC 2024
+- Changed the way form inputs' values are assigned; for example, from `value="<%= locals.inputs ? inputs.quantity: '' %>"` to `value="<%= locals.inputs?.quantity ?? '' %>"`.
+- On `POST` requests, changed chaining functions with built-in `Result` method, `mapped`. For example, from
+  ```js
+  const localErrors = errors
+    .array()
+    .reduce((accumulator, currentError) => {
+      const { path, value, msg } = currentError;
+      return { ...accumulator, [path]: { value, msg } };
+    }, {});
+  ```
+  to `const localErrors = errors.mapped();`
+- Attempted to rewrite UPC validator in `itemValidator.js` module to consider an existing UPC that is not the current item's UPC when editing an item.
+- The `deleteCategory` method no longer calls the `updateItems` method directly inside the `queries.js` module, instead `updateItems` gets passed into `deleteCategory` as a callback function.
 ---
 ### 17 DEC 2024
 - Created a `path` local variable for all `POST` methods; this ensures the original category or UPC can be referenced if a form fails validation.
@@ -38,8 +53,8 @@
 - Adding and editing items/categories use the same validators; editing items/categories need to allow existing UPC and category values.
 ---
 ### 12 DEC 2024
-- The `getCategory` method in `queries` module now takes an `id` and returns the first item of the `rows` array.
-- The `getItem` method in `queries` module will return the first item of the `rows` array.
+- The `getCategory` method in `queries.js` module now takes an `id` and returns the first item of the `rows` array.
+- The `getItem` method in `queries.js` module will return the first item of the `rows` array.
 - Added the `bail()` validator modifier for the category input.
 - Changed item label and input attributes' values, `for`/`id`/`name`, from `item` to `name`.
 - Going to an item's edit page will populate the inputs with the item's content.
@@ -81,7 +96,7 @@
 ---
 ### 28 NOV 2024
 - Created `itemForm.ejs`.
-- Created `deleteCategory` and `updateItems` query methods in `queries` module.
+- Created `deleteCategory` and `updateItems` query methods in `queries.js` module.
 - Clicking on the trashcan icon will delete it's respective category and impacted items are reassigned to the `unassigned` category.
 ---
 ### 27 NOV 2024
@@ -92,12 +107,12 @@
 - Currently, adding an item where the category exists or does not exist and the UPC does exists will update the existing item based on the UPC.
 - Navigating to a category will render items assigned to it's respective category.
 - Renamed `rowCount` property for `getCategory` and `getItem` resulting objects to `categoryExists` and `upcExists` respectively.
-- Created `getCategory`, `getItem`, and `updateItem` query methods in `queries` module. 
+- Created `getCategory`, `getItem`, and `updateItem` query methods in `queries.js` module. 
 - Deleted `item.ejs` and `itemPreview.ejs` files.
 - Attempted implementing `IF...ELSE IF` for the `insertItem` query.
 ---
 ### 07 SEP 2024
-- Each controller calls `getCategories` from the `queries` module.
+- Each controller calls `getCategories` from the `queries.js` module.
 - Clicking on `Browse By Category` will direct a user to the `categories` page.
 - A category can be created on the `addCategory` page.
 ---
@@ -105,12 +120,12 @@
 - Defined `ITEMS_SQL` string variable in `initdb` module.
 ---
 ### 04 SEP 2024
-- Created skeleton methods in `queries` module.
+- Created skeleton methods in `queries.js` module.
 ---
 ### 03 SEP 2024
 - Attached Fly Postgres cluster to application; `DATABASE_URL` will be used in development and production.
 - Initialized a `categories` table with nine different rows in the Postgres database.
-- Created `getCategories` in `queries` module; selects all rows in the `categories` table.
+- Created `getCategories` in `queries.js` module; selects all rows in the `categories` table.
 ---
 ### 29 AUG 2024
 - Created a screen breakpoint of `481px` for the `header` partial view and `add*` pages.

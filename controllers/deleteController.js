@@ -6,6 +6,7 @@ const {
   getCategories,
   deleteCategory,
   deleteItem,
+  updateItems,
   getCategory,
 } = require("../db/queries");
 const validatePassword = require("../validators/passwordValidator");
@@ -33,7 +34,6 @@ const deleteController = {
     console.log("req.url:", req.url);
     console.log("req.params:", req.params);
     const item = await getItem(req.params);
-    // const category = await getCategory({ id: item.category_id });
     console.log("item:", item);
     // Need to populate the inputs
     // Need item data
@@ -58,13 +58,8 @@ const deleteController = {
       const errors = validationResult(req);
       const { category } = req.params;
       if (!errors.isEmpty()) {
-        const localErrors = errors
-          .array()
-          .reduce((accumulator, currentError) => {
-            const { path, value, msg } = currentError;
-            return { ...accumulator, [path]: { value, msg } };
-          }, {});
-
+        const localErrors = errors.mapped();
+        console.log("localErrors:", localErrors);
         return res.status(400).render("deleteCategory", {
           title: "Delete Category",
           errors: { ...localErrors },
@@ -77,7 +72,8 @@ const deleteController = {
 
       // Need to delete category
       // Need to update all impacted items with new category
-      await deleteCategory({ category });
+      console.log("Right before deleteCategory()");
+      await deleteCategory({ category }, updateItems);
       // Need to go back to the categories page
       // Render successful message
       res.redirect("/");
@@ -101,12 +97,7 @@ const deleteController = {
       const errors = validationResult(req);
       const { category, upc } = req.params;
       if (!errors.isEmpty()) {
-        const localErrors = errors
-          .array()
-          .reduce((accumulator, currentError) => {
-            const { path, value, msg } = currentError;
-            return { ...accumulator, [path]: { value, msg } };
-          }, {});
+        const localErrors = errors.mapped();
 
         return res.status(400).render("deleteItem", {
           title: "Delete Item",
@@ -117,6 +108,7 @@ const deleteController = {
           path: `delete/item/${upc}/${category}`,
         });
       }
+
       await deleteItem(req.body);
       // Need to go back to category page
       // Render successful message

@@ -50,15 +50,9 @@ const editController = {
       console.log("postEditCategory running...");
       const errors = validationResult(req);
       const { category } = req.params;
-      if (!errors.isEmpty()) {
-        console.log("errors:", errors);
-        const localErrors = errors
-          .array()
-          .reduce((accumulator, currentError) => {
-            const { path, value, msg } = currentError;
-            return { ...accumulator, [path]: { value, msg } };
-          }, {});
 
+      if (!errors.isEmpty()) {
+        const localErrors = errors.mapped();
         console.log("localErrors:", localErrors);
         return res.status(400).render("editCategory", {
           title: "Edit Category",
@@ -89,20 +83,27 @@ const editController = {
     validateItem,
     validatePassword,
     asyncHandler(async (req, res) => {
-      console.log("postEditCategory running...");
+      console.log("postEditItem running...");
       const errors = validationResult(req);
       const { upc, category } = req.params;
 
       if (!errors.isEmpty()) {
-        console.log(errors);
-        const localErrors = errors
-          .array()
-          .reduce((accumulator, currentError) => {
-            const { path, value, msg } = currentError;
-            return { ...accumulator, [path]: { value, msg } };
-          }, {});
+        const localErrors = errors.mapped();
+        console.log("localErrors:", localErrors);
 
-        console.log(localErrors);
+        const customValidationResults = validationResult.withDefaults({
+          formatter: (error) => {
+            if (error)
+              return {
+                ...error,
+              };
+          },
+        });
+
+        const foo = customValidationResults(req);
+        console.log(errors);
+        console.log("foo:", foo.mapped());
+
         return res.status(400).render("editItem", {
           title: "Edit Item",
           errors: { ...localErrors },
@@ -113,8 +114,11 @@ const editController = {
         });
       }
 
-      const categoryExists = await getCategory(req.body);
+      const categoryExists = await getCategory({ itemExists });
+      // If category does not exist
+      //  Insert category
       console.log("categoryExists:", categoryExists);
+      await updateItem({ ...req.body, prevUPC: upc });
 
       res.redirect("/");
     }),

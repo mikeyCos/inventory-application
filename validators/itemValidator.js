@@ -1,4 +1,4 @@
-const { body } = require("express-validator");
+const { body, validationResult } = require("express-validator");
 const { getItem } = require("../db/queries");
 
 const validateItem = [
@@ -22,9 +22,18 @@ const validateItem = [
     .withMessage("UPC must be between 10 and 12 digits long.")
     .bail()
     .custom(async (value, { req }) => {
-      if (req.body.password !== undefined) return;
-
+      // Run custom validator for UPC if password input exists
       const item = await getItem({ upc: value });
+      console.log("upc custom validator running...");
+      // Need to rewrite this...
+      if (req.body.password !== undefined) {
+        // What if UPC is assigned to a different existing item?
+        if (item && item.upc !== req.params.upc)
+          throw new Error(
+            "The UPC you entered belongs to an existing item, please edit that item instead."
+          );
+        return;
+      }
 
       if (item) {
         throw new Error(

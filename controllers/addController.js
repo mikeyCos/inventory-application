@@ -34,12 +34,7 @@ const addController = {
 
       if (!errors.isEmpty()) {
         console.log(errors);
-        const localErrors = errors
-          .array()
-          .reduce((accumulator, currentError) => {
-            const { path, value, msg } = currentError;
-            return { ...accumulator, [path]: { value, msg } };
-          }, {});
+        const localErrors = errors.mapped();
 
         console.log(localErrors);
         return res.status(400).render("addCategory", {
@@ -68,12 +63,7 @@ const addController = {
       const errors = validationResult(req);
       console.log("req.body:", req.body);
       if (!errors.isEmpty()) {
-        const localErrors = errors
-          .array()
-          .reduce((accumulator, currentError) => {
-            const { path, value, msg } = currentError;
-            return { ...accumulator, [path]: { value, msg } };
-          }, {});
+        const localErrors = errors.mapped();
 
         // console.log(errors);
         console.log("localErrors");
