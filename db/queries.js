@@ -149,14 +149,14 @@ const updateItem = async ({
   console.log("quantity:", quantity);
   console.log("price:", price);
   console.log("prevUPC:", prevUPC);
-  /* await pool.query(
+  await pool.query(
     `
       UPDATE items
       SET category_id = (SELECT id FROM categories WHERE category = LOWER($1)), name = $2, upc = $3, quantity = $4, price = $5
       WHERE upc = $6;
       `,
     [category, name, upc, quantity, price, prevUPC]
-  ); */
+  );
 };
 
 const updateItems = async ({ prevCategory, newCategory = "unassigned" }) => {

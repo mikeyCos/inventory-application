@@ -60,12 +60,12 @@ const addController = {
   postAddItem: [
     validateItem,
     asyncHandler(async (req, res) => {
+      console.log("postAddItem running...");
       const errors = validationResult(req);
-      console.log("req.body:", req.body);
       if (!errors.isEmpty()) {
         const localErrors = errors.mapped();
 
-        // console.log(errors);
+        console.log(errors);
         console.log("localErrors");
         console.log(localErrors);
         return res.status(400).render("addItem", {
@@ -76,9 +76,6 @@ const addController = {
           path: "add/item",
         });
       }
-
-      console.log("postAddItem running...");
-      console.log(req.body);
 
       // categoryExists returns a category object or undefined
       // Do I need a try...catch block here?

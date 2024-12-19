@@ -1,7 +1,7 @@
 # Changelog
 ---
 ### 19 DEC 2024
-- 
+- Items can be edited when the form is successfully submitted.
 ---
 ### 18 DEC 2024
 - Changed the way form inputs' values are assigned; for example, from `value="<%= locals.inputs ? inputs.quantity: '' %>"` to `value="<%= locals.inputs?.quantity ?? '' %>"`.

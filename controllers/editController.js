@@ -1,5 +1,5 @@
 const asyncHandler = require("express-async-handler");
-const { validationResult } = require("express-validator");
+const { validationResult, matchedData } = require("express-validator");
 const {
   getItem,
   getItems,
@@ -7,6 +7,7 @@ const {
   updateCategory,
   updateItem,
   getCategory,
+  insertCategory,
 } = require("../db/queries");
 const validateCategory = require("../validators/categoryValidator");
 const validatePassword = require("../validators/passwordValidator");
@@ -53,7 +54,7 @@ const editController = {
 
       if (!errors.isEmpty()) {
         const localErrors = errors.mapped();
-        console.log("localErrors:", localErrors);
+
         return res.status(400).render("editCategory", {
           title: "Edit Category",
           errors: { ...localErrors },
@@ -89,10 +90,12 @@ const editController = {
 
       if (!errors.isEmpty()) {
         const localErrors = errors.mapped();
+        console.log("errors:", errors);
         console.log("localErrors:", localErrors);
-
-        const customValidationResults = validationResult.withDefaults({
+        /* const customValidationResults = validationResult.withDefaults({
           formatter: (error) => {
+            console.log("Inside formatter");
+            console.log(error);
             if (error)
               return {
                 ...error,
@@ -101,8 +104,11 @@ const editController = {
         });
 
         const foo = customValidationResults(req);
-        console.log(errors);
-        console.log("foo:", foo.mapped());
+        const fooMapped = foo.mapped();
+        console.log(fooMapped); */
+
+        // console.log(errors);
+        // console.log("foo:", foo.mapped());
 
         return res.status(400).render("editItem", {
           title: "Edit Item",
@@ -114,10 +120,11 @@ const editController = {
         });
       }
 
-      const categoryExists = await getCategory({ itemExists });
       // If category does not exist
       //  Insert category
-      console.log("categoryExists:", categoryExists);
+      // Update Item
+      const categoryExists = await getCategory(req.body);
+      if (!categoryExists) await insertCategory(req.body);
       await updateItem({ ...req.body, prevUPC: upc });
 
       res.redirect("/");
