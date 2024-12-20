@@ -1,5 +1,9 @@
 # Changelog
 ---
+### 20 DEC 2024
+- Inserted logical OR (`||`) operator in `pool.query(text: string, values?: any[])` for quantity and price values during the `insertItem` query. If the quantity and price values are empty strings, then their values will be set to `null`.
+- Successfully submitting a new category will call a redirect to `/add/category/?success=true`.
+---
 ### 19 DEC 2024
 - Items can be edited when the form is successfully submitted.
 ---

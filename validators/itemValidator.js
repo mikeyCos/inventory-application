@@ -1,9 +1,4 @@
-const {
-  body,
-  validationResult,
-  checkExact,
-  oneOf,
-} = require("express-validator");
+const { body } = require("express-validator");
 const { getItem } = require("../db/queries");
 
 const validateItem = [
@@ -60,8 +55,10 @@ const validateItem = [
     .trim()
     .isInt({ min: 0, max: 999999 })
     .escape()
-    .withMessage("Quantity must be between 0 and 999,999."),
+    .withMessage("Quantity must be between 0 and 999,999.")
+    .optional({ values: "falsy" }),
   body("price")
+    .optional({ values: "falsy" })
     .trim()
     .isFloat({ min: 0.01, max: 999999 })
     .escape()

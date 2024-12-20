@@ -13,6 +13,7 @@ const addController = {
   getAddCategory: asyncHandler(async (req, res) => {
     console.log("getAddCategory running...");
     console.log("req.originalUrl:", req.originalUrl);
+    console.log("req.query:", req.query);
     res.render("addCategory", {
       title: "Add Category",
       action: "add",
@@ -33,10 +34,8 @@ const addController = {
       const errors = validationResult(req);
 
       if (!errors.isEmpty()) {
-        console.log(errors);
         const localErrors = errors.mapped();
 
-        console.log(localErrors);
         return res.status(400).render("addCategory", {
           title: "Add Category",
           errors: { ...localErrors },
@@ -49,12 +48,8 @@ const addController = {
       await insertCategory(req.body);
       // Need to rerender add category page with no inputs
       // Render successful message
-      /* res.render("addCategory", {
-        title: "Add Category",
-        action: "add",
-        path: "add/category",
-      }); */
-      res.redirect("/");
+      res.redirect(`/add/category/?success=true`);
+      // res.redirect("/");
     }),
   ],
   postAddItem: [
@@ -82,27 +77,23 @@ const addController = {
       const categoryExists = await getCategory(req.body);
       console.log("categoryExists:", categoryExists);
 
-      if (categoryExists) {
-        console.log("category exists");
-        // Insert item
-        await insertItem(req.body);
-      } else {
-        console.log("category does not exist");
-        // Insert category
-        // Insert item
-        // await insertCategory(req.body);
-        // await insertItem(req.body);
-      }
+      // If category does not exist
+      //  Insert category
+      // Update Item
+      // if (!categoryExists) await insertCategory(req.body);
+      // await insertItem(req.body);
+      // await insertItem({ ...req.body, quantity: null });
+      console.log(req.body);
 
       // Need to rerender add item page with no inputs
       // Render successful message
+      res.redirect("/");
       /* res.status(200).render("addItem", {
         title: "Add Item",
         inputs: { ...req.body },
         action: "add",
         path: "add/item",
       }); */
-      res.redirect("/");
     }),
   ],
 };

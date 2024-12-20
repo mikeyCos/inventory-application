@@ -115,7 +115,7 @@ const insertItem = async ({ category, name, upc, quantity, price }) => {
       INSERT INTO items (category_id, name, upc, quantity, price)
       VALUES ((SELECT id FROM categories WHERE category = LOWER($1)), $2, $3, $4, $5);
       `,
-    [category, name, upc, quantity, price]
+    [category, name, upc, quantity || null, price || null]
   );
 
   console.log("insertItem query completed...");
