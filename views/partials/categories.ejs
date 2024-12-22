@@ -5,10 +5,10 @@
         <li>
           <a href="/category/<%= categoryObj.category %>"><%= categoryObj.category %></a>
           <% if (locals.delete && categoryObj.category !== 'unassigned') { %>
-          <a class="category-edit" href="/edit/category/<%= categoryObj.category %>">
+          <a class="category-edit" href="/category/edit/<%= categoryObj.category %>">
             <%- include("../../public/assets/icons/edit.svg") %>
           </a>
-          <a class="category-delete" href="/delete/category/<%= categoryObj.category %>">
+          <a class="category-delete" href="/category/delete/<%= categoryObj.category %>">
             <%- include("../../public/assets/icons/delete.svg") %>
           </a>
             <% } %>

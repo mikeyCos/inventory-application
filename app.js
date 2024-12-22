@@ -4,9 +4,7 @@ const { staticPaths, viewsPaths } = require("./paths/paths");
 const indexRouter = require("./routes/indexRouter");
 const placeholderRouter = require("./routes/placeholderRouter");
 const categoriesRouter = require("./routes/categoriesRouter");
-const addRouter = require("./routes/addRouter");
-const editRouter = require("./routes/editRouter");
-const deleteRouter = require("./routes/deleteRouter");
+const itemsRouter = require("./routes/itemsRouter");
 const { getCategories } = require("./db/queries");
 
 const app = express();
@@ -36,9 +34,7 @@ app.use(async (req, res, next) => {
 app.use("/", indexRouter);
 app.use("/placeholderA", placeholderRouter);
 app.use(["/category", "/categories"], categoriesRouter);
-app.use("/add", addRouter);
-app.use("/edit", editRouter);
-app.use("/delete", deleteRouter);
+app.use(["/item"], itemsRouter);
 
 app.use((req, res) => {
   console.log("404");

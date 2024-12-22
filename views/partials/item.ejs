@@ -4,10 +4,10 @@
   <p>quantity: <%= quantity %></p>
   <p>unit price: <%= price %></p>
   <p>total price: <%= (price * quantity) %></p>
-  <a href="/delete/item/<%= upc %>/<%= category %>">
+  <a href="/item/delete/<%= upc %>/<%= category %>">
     <%- include("../../public/assets/icons/delete.svg") %>
   </a>
-  <a href="/edit/item/<%= upc %>/<%= category %>">
+  <a href="/item/edit/<%= upc %>/<%= category %>">
     <%- include("../../public/assets/icons/edit.svg") %>
   </a>
 
