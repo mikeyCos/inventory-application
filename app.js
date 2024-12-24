@@ -45,7 +45,9 @@ app.use((req, res) => {
 // Error-handling
 app.use((err, req, res, next) => {
   console.log("error middleware running...");
+  console.log("err:", err);
   console.log("req.url:", req.url);
+  res.render("404", { title: "404 - Page Not Found" });
 });
 
 app.listen(PORT, () => console.log(`Application running on port: ${PORT}`));

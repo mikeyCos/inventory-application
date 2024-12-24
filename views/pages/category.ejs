@@ -5,6 +5,7 @@
   <%- include('./header') %>
   <main>
     <section id="category">
+      <%- locals.success && include('./success') %>
       <h2><%= category %></h2>
       <%- include('./items', { items }) %>
     </section>

@@ -1,6 +1,12 @@
 # Changelog
 ---
-###
+### 24 DEC 2024
+- 
+---
+### 23 DEC 2024
+- Attached queries to the paths in `redirect` calls in each `POST` request.
+- Created `queryValidator.js` module.
+- Included `<%- locals.success && include('./success') %>` to `addCategory`/`addItem`/`categories`/`category` pages.
 ---
 ### 21 DEC 2024
 - Created `itemsRouter.js` module.

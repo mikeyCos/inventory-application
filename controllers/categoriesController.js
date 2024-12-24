@@ -10,6 +10,7 @@ const {
 } = require("../db/queries");
 const validateCategory = require("../validators/categoryValidator");
 const validatePassword = require("../validators/passwordValidator");
+const validateQuery = require("../validators/queryValidator");
 
 const categoriesController = {
   getCategories: asyncHandler(async (req, res) => {
@@ -19,8 +20,18 @@ const categoriesController = {
     console.log("req.query:", req.query);
     console.log("req.params:", req.params);
     console.log("req.body:", req.body);
+
+    const { success, category, newCategory } = req.query;
+    // Is a try...catch block needed?
+    // What if category is edited?
+    // What if category is deleted?
+    const msg = `${category} ${
+      newCategory ? `changed to ${newCategory}` : "deleted"
+    }`;
+
     res.render("categories", {
       title: "Categories",
+      ...(success && { success: { msg } }),
     });
   }),
   getCategoryItems: asyncHandler(async (req, res) => {
@@ -29,18 +40,49 @@ const categoriesController = {
     console.log("req.params:", req.params);
     const { category } = req.params;
     const items = await getItems(req.params);
-    res.render("category", { title: category, category, items });
-  }),
-  getAddCategory: asyncHandler(async (req, res) => {
-    console.log("getAddCategory running...");
-    console.log("req.originalUrl:", req.originalUrl);
-    console.log("req.query:", req.query);
-    res.render("addCategory", {
-      title: "Add Category",
-      action: "add",
-      path: "category/add",
+    const { success, upc } = req.query;
+
+    // Is a try...catch block needed?
+    // What if item is edited?
+    //  How to check what has changed
+    // What if item is deleted?
+    const msg = `${upc} deleted`;
+
+    res.render("category", {
+      title: category,
+      category,
+      items,
+      ...(success && { success: { msg } }),
     });
   }),
+  getAddCategory: [
+    validateQuery,
+    asyncHandler(async (req, res, next) => {
+      const errors = validationResult(req);
+      console.log("getAddCategory running...");
+      console.log("getAddCategory errors:", errors);
+      console.log("req.originalUrl:", req.originalUrl);
+      console.log("req.query:", req.query);
+      console.log("req.path:", req.path);
+      // Is a try...catch block needed?
+      // What if req.success is a value other than 'true'?
+      // What if category is not in the database?
+      if (!errors.isEmpty()) {
+        // Render or redirect to a 404 page?
+        // res.redirect("/");
+        // Error [ERR_HTTP_HEADERS_SENT]: Cannot set headers after they are sent to the client
+        // next("test");
+      }
+
+      const { success, category } = req.query;
+      res.render("addCategory", {
+        title: "Add Category",
+        action: "add",
+        path: "category/add",
+        ...(success && { success: { msg: `${category} added` } }),
+      });
+    }),
+  ],
   getDeleteCategory: asyncHandler(async (req, res) => {
     console.log("getDeleteCategory running...");
     console.log("req.url:", req.url);
@@ -76,6 +118,9 @@ const categoriesController = {
     validateCategory,
     asyncHandler(async (req, res) => {
       console.log("postAddCategory running...");
+      console.log("req.path:", req.path);
+      console.log("req.route:", req.route);
+      console.log("req.baseUrl:", req.baseUrl);
       const errors = validationResult(req);
 
       if (!errors.isEmpty()) {
@@ -90,12 +135,11 @@ const categoriesController = {
         });
       }
 
-      await insertCategory(req.body);
+      const { category } = req.body;
+      await insertCategory({ category });
       // Redirect to the "add category" page
       // Render successful message
-      const foo = encodeURIComponent(JSON.stringify(req.body));
-      res.redirect(`/category/add/?success=true&category=${foo}`);
-      // res.redirect("/");
+      res.redirect(`/category/add?success=true&category=${category}`);
     }),
   ],
   postEditCategory: [
@@ -125,7 +169,9 @@ const categoriesController = {
       await updateCategory({ prevCategory: category, newCategory });
       // Redirect to the categories page
       // Render successful message
-      res.redirect("/categories");
+      res.redirect(
+        `/categories?success=true&category=${category}&newCategory=${newCategory}`
+      );
     }),
   ],
   postDeleteCategory: [
@@ -157,7 +203,7 @@ const categoriesController = {
       await deleteCategory({ category }, updateItems);
       // Redirect to the categories page
       // Render successful message
-      res.redirect("/categories");
+      res.redirect(`/categories?success=true&category=${category}`);
     }),
   ],
 };

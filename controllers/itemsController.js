@@ -13,10 +13,14 @@ const validatePassword = require("../validators/passwordValidator");
 
 const itemsController = {
   getAddItem: asyncHandler(async (req, res) => {
+    const { success, upc } = req.query;
+
+    // How to output added item's info on success page?
     res.render("addItem", {
       title: "Add Item",
       action: "add",
       path: "item/add",
+      ...(success && { success: { msg: `${upc} added` } }),
     });
   }),
   getEditItem: asyncHandler(async (req, res) => {
@@ -86,7 +90,9 @@ const itemsController = {
 
       // Redirect to the "add item" page
       // Render successful message
-      res.redirect("/item/add");
+      // res.redirect("/item/add");
+      const { upc } = req.body;
+      res.redirect(`/item/add/?success=true&upc=${upc}`);
     }),
   ],
   postEditItem: [
@@ -138,7 +144,8 @@ const itemsController = {
 
       // Redirect to the item's category page
       // Render successful message
-      res.redirect(`/category/${req.body.category}`);
+      // res.redirect(`/category/${req.body.category}`);
+      res.redirect(`/category/${req.body.category}/?success=true&upc=${upc}`);
     }),
   ],
   postDeleteItem: [
@@ -167,7 +174,8 @@ const itemsController = {
       await deleteItem(req.body);
       // Need to go back to category page
       // Render successful message
-      res.redirect(`/category/${category}`);
+      // res.redirect(`/category/${category}`);
+      res.redirect(`/category/${req.body.category}/?success=true&upc=${upc}`);
     }),
   ],
 };
