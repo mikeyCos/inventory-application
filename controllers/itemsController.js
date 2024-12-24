@@ -92,7 +92,7 @@ const itemsController = {
       // Render successful message
       // res.redirect("/item/add");
       const { upc } = req.body;
-      res.redirect(`/item/add/?success=true&upc=${upc}`);
+      res.redirect(`/item/add/?added=true&upc=${upc}`);
     }),
   ],
   postEditItem: [
@@ -145,7 +145,7 @@ const itemsController = {
       // Redirect to the item's category page
       // Render successful message
       // res.redirect(`/category/${req.body.category}`);
-      res.redirect(`/category/${req.body.category}/?success=true&upc=${upc}`);
+      res.redirect(`/category/${req.body.category}/?edited=true&upc=${upc}`);
     }),
   ],
   postDeleteItem: [
@@ -175,7 +175,7 @@ const itemsController = {
       // Need to go back to category page
       // Render successful message
       // res.redirect(`/category/${category}`);
-      res.redirect(`/category/${req.body.category}/?success=true&upc=${upc}`);
+      res.redirect(`/category/${req.body.category}/?deleted=true&upc=${upc}`);
     }),
   ],
 };

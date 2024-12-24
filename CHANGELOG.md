@@ -1,7 +1,12 @@
 # Changelog
 ---
-### 24 DEC 2024
+### 25 DEC 2024
 - 
+---
+### 24 DEC 2024
+- Changed `success` request query key to `added`/`edited`/`deleted` depending on the `POST` request.
+- Attempted to validate request query parameters using `express-validator`.
+- Inserted logical OR (`||`) operator in `pool.query(text: string, values?: any[])` for quantity and price values during the `updateItem` query.
 ---
 ### 23 DEC 2024
 - Attached queries to the paths in `redirect` calls in each `POST` request.

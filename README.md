@@ -154,6 +154,7 @@ _For more examples, please refer to the [Documentation](https://example.com)_
   - [ ] Delete modal will have `confirm` and `cancel` buttons.
   - [ ] Edit modal will include a form with input content.
 - [ ] Build custom validator to check for duplicate categories and items.
+- [ ] Build a request query parameter validator.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -181,7 +182,9 @@ Project Link: [https://github.com/mikeyCos/cv-application](https://github.com/mi
 
 ## Questions
 
-1. Lorem ipsum
+1. How to validate request query parameters? What if any of the query parameters are invalid? What if any of the query parameters' values are invalid?
+2. Are `res.redirect` preferred on `POST` requests after validations return no errors?
+3.  
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

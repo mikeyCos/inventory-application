@@ -155,7 +155,7 @@ const updateItem = async ({
       SET category_id = (SELECT id FROM categories WHERE category = LOWER($1)), name = $2, upc = $3, quantity = $4, price = $5
       WHERE upc = $6;
       `,
-    [category, name, upc, quantity, price, prevUPC]
+    [category, name, upc, quantity || null, price || null, prevUPC]
   );
 };
 
