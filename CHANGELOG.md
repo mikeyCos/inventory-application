@@ -1,7 +1,11 @@
 # Changelog
 ---
 ### 25 DEC 2024
-- 
+- Deleted `loadCategories.js` module from `utils` subdirectory.
+- Created `notifications.js` module in the `events` subdirectory.
+- Created `notifications.css` stylesheet in the `styles` subdirectory.
+- Defined CSS properties for elements within the `.categories-nav` container.
+- Defined three breakpoints,`481px`/`768px`/`1024px`, for a few stylesheets.
 ---
 ### 24 DEC 2024
 - Changed `success` request query key to `added`/`edited`/`deleted` depending on the `POST` request.

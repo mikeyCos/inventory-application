@@ -22,12 +22,16 @@ app.use(express.urlencoded({ extended: true }));
 // Application-level
 app.use(async (req, res, next) => {
   // Sets categories in res.locals
-  const categories = await getCategories();
-  // More on res.locals
-  // https://expressjs.com/en/api.html#res.locals
-  // What if getCategories fails?
-  res.locals.categories = categories;
-  next();
+  try {
+    const categories = await getCategories();
+    // More on res.locals
+    // https://expressjs.com/en/api.html#res.locals
+    // What if getCategories fails?
+    res.locals.categories = categories;
+    next();
+  } catch (err) {
+    next(err);
+  }
 });
 
 // Router-level
@@ -36,6 +40,7 @@ app.use("/placeholderA", placeholderRouter);
 app.use(["/category", "/categories"], categoriesRouter);
 app.use(["/item"], itemsRouter);
 
+// Middleware when no routes match
 app.use((req, res) => {
   console.log("404");
   console.log("req.url:", req.url);

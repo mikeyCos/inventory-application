@@ -23,11 +23,31 @@ nav .categories-nav {
   position: relative;
 }
 
-.drop-down:hover .categories-nav {
-  display: block;
+.drop-down:hover .categories-nav,
+.drop-down > .categories-nav:hover {
+  display: flex;
+  /* justify-content: center; */
+  width: 100%;
+  background-color: rgb(200, 10, 10);
+  z-index: 999;
+}
+
+.drop-down > .categories-nav > ul {
+  width: inherit;
+}
+
+.drop-down > .categories-nav > ul > li {
+  display: flex;
+}
+
+.drop-down > .categories-nav > ul > li > a {
+  flex: 1;
+  text-align: center;
+  padding: var(--category-padding);
 }
 
 nav .nav-right a.active {
+  /* How to make this work? */
   color: lightsalmon;
 }
 

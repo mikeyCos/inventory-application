@@ -1,0 +1,16 @@
+.notifications {
+  display: flex;
+  justify-content: center;
+  margin: 0 25%;
+  width: 50%;
+  text-align: center;
+  background-color: rgb(80, 248, 74);
+  /* visibility: hidden;
+  max-height: 0; */
+}
+
+.notifications.active {
+  visibility: visible;
+  max-height: max-content;
+  padding: 2rem;
+}

@@ -2,22 +2,11 @@
  * Stylesheet for addCategory and addItem views
 */
 
-form > ul {
-  display: flex;
-  flex-direction: column;
-}
-
-form > ul li {
-  display: flex;
-  flex-direction: column;
-}
-
 @media screen and (min-width: 481px) {
-  form {
-    max-width: 500px;
-    margin: auto;
-  }
+}
 
-  form > ul {
-  }
+@media screen and (min-width: 768px) {
+}
+
+@media screen and (min-width: 1024px) {
 }

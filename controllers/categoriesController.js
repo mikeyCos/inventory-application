@@ -15,7 +15,6 @@ const validateQuery = require("../validators/queryValidator");
 const categoriesController = {
   getCategories: asyncHandler(async (req, res) => {
     console.log("getCategories running from categoriesController...");
-    // https://stackoverflow.com/questions/59564689/how-to-make-an-modal-with-ejs-and-node
     console.log("req.url:", req.url);
     console.log("req.query:", req.query);
     console.log("req.params:", req.params);
@@ -69,6 +68,7 @@ const categoriesController = {
       ...(added && { success: { msg: `${category} category added` } }),
     });
   }),
+
   getDeleteCategory: asyncHandler(async (req, res) => {
     console.log("getDeleteCategory running...");
     console.log("req.url:", req.url);
@@ -126,6 +126,8 @@ const categoriesController = {
       // Redirect to the "add category" page
       // Render successful message
       res.redirect(`/category/add?added=true&category=${category}`);
+
+      // res.redirect(`/category/add`);
     }),
   ],
   postEditCategory: [
