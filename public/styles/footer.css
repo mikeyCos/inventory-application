@@ -1,20 +1,23 @@
 footer {
-  background-color: var(--font-color-primary);
-  padding: 0.5rem 0;
+  background-color: var(--bkg-color-secondary);
   box-shadow: 0 0 4px black;
-  color: var(--bkg-color-secondary);
+  color: var(--font-color-primary);
 }
 
-footer > div {
-  display: flex;
-  justify-content: center;
+footer > ul {
+  display: grid;
+  grid-template-columns: 1fr min-content;
+  align-items: center;
+  justify-items: center;
+  padding: 0.25rem;
   /* DELETE LATER */
-  background-color: rgb(172, 255, 175);
+  /* background-color: rgb(172, 255, 175); */
 }
 
+/* Desktops */
 @media screen and (min-width: 1024px) {
-  footer > div {
-    max-width: 1000px;
-    margin: auto;
+  footer > ul {
+    /* max-width: 1000px;
+    margin: auto; */
   }
 }

@@ -148,13 +148,16 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 ## Roadmap
 
 - [x] Build skeleton components.
-- [ ] Build a reusable form for adding and updating items.
-- [ ] Build a reusable form for adding and updating categories.
+- [x] Build a reusable form for adding and updating items.
+- [x] Build a reusable form for adding and updating categories.
 - [ ] Build a delete and edit confirmation modal.
   - [ ] Delete modal will have `confirm` and `cancel` buttons.
   - [ ] Edit modal will include a form with input content.
-- [ ] Build custom validator to check for duplicate categories and items.
+- [x] Build custom validator to check for duplicate categories and items.
 - [ ] Build a request query parameter validator.
+- [ ] Build search item by category or upc functionality.
+- [ ] Divide items table into separate tables; prices, quantities, locations.
+- [ ] Build edit/delete forms on the `categories` page; toggled by edit/delete/cancel/submit buttons. 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -185,7 +188,7 @@ Project Link: [https://github.com/mikeyCos/cv-application](https://github.com/mi
 1. How to validate request query parameters? What if any of the query parameters are invalid? What if any of the query parameters' values are invalid?
 2. Are `res.redirect` preferred on `POST` requests after validations return no errors?
 3. Does it make sense to dynamically insert scripts or style sheets into the `head` element? For example, defining a local variable called `styleSheets` that is an array of paths.
-4. 
+4. When does it make sense to store null values in a table?
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

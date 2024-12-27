@@ -1,9 +1,13 @@
+#category > h2 {
+  text-transform: capitalize;
+}
+
 .categories-nav a {
   text-transform: capitalize;
 }
 
 .categories-nav a:hover {
-  background-color: orange;
+  background-color: var(--bkg-color-tertiary);
 }
 
 /* Categories page */

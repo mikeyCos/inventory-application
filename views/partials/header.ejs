@@ -14,7 +14,7 @@
       </li>
 
       <li class="nav-item drop-down">
-        <a href="/categories">Browse By Category</a>
+        <a href="/categories">Categories</a>
         <%- locals.categories && include('./categories', { categories }) %>
       </li>
 
@@ -27,4 +27,7 @@
       </li>
     </ul>
   </nav>
+
+  <%- include('./notifications') %>
+  <%- locals.success && include('./notifications') %>
 </header>

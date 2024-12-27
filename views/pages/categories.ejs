@@ -6,8 +6,6 @@
   <%- include('./header') %>
   <main>
     <section id="categories">
-      <%- locals.success && include('./success') %>
-      <%- include('./success') %>
       <h2>Categories</h2>
       <%- include('../partials/categories', { categories, delete: true }) %>
     </section>

@@ -1,7 +1,12 @@
 # Changelog
 ---
 ### 27 DEC 2024
-- 
+- Added `Inter` variable Google Font in `fonts` subdirectory.
+- For mobile devices, item inputs are the length of page.
+- At screen width `481px`, quantity and unit price inputs are positioned next to each other.
+- Inserted a Github anchor icon in the `footer`.
+- Created `icons.css` style sheet.
+- Renamed `success` partial to `notifications`
 ---
 ### 26 DEC 2024
 - Created `items.css` and `forms.css` style sheets.

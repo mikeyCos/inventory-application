@@ -4,11 +4,19 @@
  * Define general styling here
  */
 
+@font-face {
+  font-family: Inter;
+  src: url("../assets/fonts/Inter/Inter-VariableFont_opsz\,wght.ttf")
+    format("truetype");
+}
+
 :root {
+  --font-family-primary: Inter, sans-serif;
   --font-color-primary: #2e282a;
-  --bkg-color-primary: #17bebb;
-  --bkg-color-secondary: #edb88b;
-  --bkg-color-tertiary: #ef3e36;
+  --bkg-color-primary: #f3f0d7;
+  --bkg-color-secondary: #cee5d0;
+  --bkg-color-tertiary: #fed2aa;
+  --bkg-color-quaternary: #ffbf86;
   --category-padding: 0.5rem;
 }
 
@@ -17,21 +25,43 @@ body {
   display: grid;
   grid-auto-rows: min-content 1fr min-content;
   background-color: var(--bkg-color-primary);
+  font-family: var(--font-family-primary);
 }
 
 main {
   /* padding: 0 2rem; */
   /* padding: 2rem 0; */
+  margin-top: 1rem;
   /* DELETE LATER */
-  background-color: lightgray;
-  border: 2px solid rgb(0, 255, 0);
 }
 
 main > section {
   height: 100%;
   max-width: 1000px;
   margin: auto;
+  padding: 0 0.5rem;
   /* DELETE LATER */
-  background-color: lightpink;
-  border: 2px solid black;
+  /* background-color: lightpink; */
+  /* border: 2px solid black; */
+}
+
+/* Small devices */
+@media screen and (min-width: 481px) {
+  main > section {
+    padding: 0 0.5rem;
+  }
+}
+
+/* Tablets */
+@media screen and (min-width: 768px) {
+  main > section {
+    /* padding: 0; */
+  }
+}
+
+/* Desktops */
+@media screen and (min-width: 1024px) {
+  main > section {
+    padding: 0;
+  }
 }
