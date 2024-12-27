@@ -13,14 +13,16 @@ const validatePassword = require("../validators/passwordValidator");
 
 const itemsController = {
   getAddItem: asyncHandler(async (req, res) => {
-    const { success, upc } = req.query;
+    console.log("getAddItem running...");
+    const { added, upc } = req.query;
 
     // How to output added item's info on success page?
+
     res.render("addItem", {
       title: "Add Item",
       action: "add",
       path: "item/add",
-      ...(success && { success: { msg: `${upc} added` } }),
+      ...(added && { success: { msg: `${upc} added` } }),
     });
   }),
   getEditItem: asyncHandler(async (req, res) => {

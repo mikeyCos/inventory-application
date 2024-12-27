@@ -42,8 +42,7 @@ const categoriesController = {
     //  How to check what has changed
     // What if item is deleted?
     const msg = `${upc} item ${edited ? `updated` : `deleted`}`;
-    console.log(msg);
-    console.log((edited ?? deleted) && { success: { msg } });
+    console.log("items:", items);
     res.render("category", {
       title: category,
       category,

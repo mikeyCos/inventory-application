@@ -1,11 +1,21 @@
 # Changelog
 ---
+### 27 DEC 2024
+- 
+---
+### 26 DEC 2024
+- Created `items.css` and `forms.css` style sheets.
+- Moved form CSS selectors to `form.css` style sheet.
+- Added `undraw_logistics.svg` to `icons` subdirectory.
+- Data for items are now rendered in a `table` element.
+- Temporarily rendering notifications with filler text on all pages including the `success` partial.
+---
 ### 25 DEC 2024
 - Deleted `loadCategories.js` module from `utils` subdirectory.
 - Created `notifications.js` module in the `events` subdirectory.
-- Created `notifications.css` stylesheet in the `styles` subdirectory.
+- Created `notifications.css` style sheet in the `styles` subdirectory.
 - Defined CSS properties for elements within the `.categories-nav` container.
-- Defined three breakpoints,`481px`/`768px`/`1024px`, for a few stylesheets.
+- Defined three breakpoints,`481px`/`768px`/`1024px`, for a few style sheets.
 ---
 ### 24 DEC 2024
 - Changed `success` request query key to `added`/`edited`/`deleted` depending on the `POST` request.
@@ -110,7 +120,7 @@
 - Opened modal cannot be closed with `ESC` key.
 ---
 ### 05 DEC 2024
-- Created `categories.css` stylesheet.
+- Created `categories.css` style sheet.
 - Attempted send a `GET` request by form buttons to render a opened modal.
 - Currently, edit and delete buttons do not do anything.
 - Moved form elements next to the anchor element in the `categories` partial.
@@ -159,7 +169,7 @@
 - Created a screen breakpoint of `481px` for the `header` partial view and `add*` pages.
 - Currently, `addCategory` and `addItem` views use conditionals to render an input's error.
 - Errors from `validationResult(req)` are reduced to an object; the error's `path` will be an object property with `value` and `msg` properties.
-- Created `add` stylesheet for styling `addCategory` and `addItem` views.
+- Created `add` style sheet for styling `addCategory` and `addItem` views.
 ---
 ### 28 AUG 2024
 - Clicking on a category revealed by hovering over `Shop By Category` will render the `category` view.
@@ -179,5 +189,5 @@
 - Created a variety of subdirectories including: `paths`, `public`, `routes`, `utils`, and `views`.
 - Template can be locally started with `npm run dev`.
 - Defined static and non-static paths in `paths/paths.js`.
-- Created and linked a `reset` stylesheet.
+- Created and linked a `reset` style sheet.
 ---

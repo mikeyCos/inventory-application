@@ -184,7 +184,8 @@ Project Link: [https://github.com/mikeyCos/cv-application](https://github.com/mi
 
 1. How to validate request query parameters? What if any of the query parameters are invalid? What if any of the query parameters' values are invalid?
 2. Are `res.redirect` preferred on `POST` requests after validations return no errors?
-3. 
+3. Does it make sense to dynamically insert scripts or style sheets into the `head` element? For example, defining a local variable called `styleSheets` that is an array of paths.
+4. 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

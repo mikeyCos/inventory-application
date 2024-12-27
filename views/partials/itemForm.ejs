@@ -1,52 +1,52 @@
 <form action="/<%= path %>" method="post">
   <h2><%= action %> Item</h2>
   <ul>
-    <li>
+    <li class="form-item">
       <label for="category">Category</label>
       <input id="category" name="category" type="text" value="<%= locals.inputs?.category ?? 'Unassigned' %>" <%= locals.action === 'delete' ? "readonly" : '' %>>
       <% if (locals.errors?.category) { %>
-        <p><%= errors.category.msg %></p>
+        <p class="input-error"><%= errors.category.msg %></p>
       <% } %>
     </li>
 
-    <li>
+    <li class="form-item">
       <label for="name">Item Name:</label>
       <input id="name" name="name" type="text" value="<%= locals.inputs?.name ?? '' %>" <%= locals.action === 'delete' ? "readonly" : '' %>>
       <% if (locals.errors?.name) { %>
-        <p><%= errors.name.msg %></p>
+        <p class="input-error"><%= errors.name.msg %></p>
       <% } %>
     </li>
 
-    <li>
+    <li class="form-item">
       <label for="upc">UPC:</label>
       <input id="upc" name="upc" inputmode="numeric" oninput="this.value = this.value.replace(/\D+/g, '')" value="<%= locals.inputs?.upc ?? '' %>" <%= locals.action === 'delete' ? "readonly" : '' %>>
       <% if (locals.errors?.upc) { %>
-        <p><%= errors.upc.msg %></p>
+        <p class="input-error"><%= errors.upc.msg %></p>
       <% } %>
     </li>
     
-    <li>
+    <li class="form-item">
       <label for="quantity">Quantity</label>
       <input id="quantity" name="quantity" type="number" value="<%= locals.inputs?.quantity ?? '' %>" <%= locals.action === 'delete' ? "readonly" : '' %>>
       <% if (locals.errors?.quantity) { %>
-        <p><%= errors.quantity.msg %></p>
+        <p class="input-error"><%= errors.quantity.msg %></p>
       <% } %>
     </li>
     
-    <li>
+    <li class="form-item">
       <label for="price">Unit price:</label>
       <input id="price" name="price" type="number" step="0.01" value="<%= locals.inputs?.price ?? '' %>" <%= locals.action === 'delete' ? "readonly": '' %>>
       <% if (locals.errors?.price) { %>
-        <p><%= errors.price.msg %></p>
+        <p class="input-error"><%= errors.price.msg %></p>
       <% } %>
     </li>
 
     <% if (locals.password) { %>
-      <li>
+      <li class="form-item">
         <label for="password">Password</label>
         <input id="password" name="password" type="password">
         <% if (locals.errors?.password) { %>
-          <p><%= errors.password.msg %></p>
+          <p class="input-error"><%= errors.password.msg %></p>
         <% } %>
       </li>
     <% } %>

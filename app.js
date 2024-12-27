@@ -24,12 +24,14 @@ app.use(async (req, res, next) => {
   // Sets categories in res.locals
   try {
     const categories = await getCategories();
-    // More on res.locals
+    // About res.locals
     // https://expressjs.com/en/api.html#res.locals
     // What if getCategories fails?
     res.locals.categories = categories;
     next();
   } catch (err) {
+    // Table does not exist
+    // code: 42P01
     next(err);
   }
 });

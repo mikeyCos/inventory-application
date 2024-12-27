@@ -8,4 +8,13 @@ footer {
 footer > div {
   display: flex;
   justify-content: center;
+  /* DELETE LATER */
+  background-color: rgb(172, 255, 175);
+}
+
+@media screen and (min-width: 1024px) {
+  footer > div {
+    max-width: 1000px;
+    margin: auto;
+  }
 }

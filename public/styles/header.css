@@ -2,10 +2,17 @@ header {
   padding: 1rem;
 }
 
+.logo {
+  height: fit-content;
+  width: 100%;
+  max-width: 200px;
+}
+
 nav {
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 1rem;
 }
 
 nav > ul {
@@ -17,6 +24,16 @@ nav > ul {
 nav .categories-nav {
   display: none;
   position: absolute;
+}
+
+nav .nav-item > a {
+  display: block;
+  padding: 0.5rem;
+  text-align: center;
+}
+
+nav .nav-item > a:hover {
+  background-color: orange;
 }
 
 .drop-down {
@@ -59,5 +76,12 @@ nav .nav-right a.active {
 
   nav > ul {
     flex-direction: row;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  nav {
+    max-width: 1000px;
+    margin: auto;
   }
 }

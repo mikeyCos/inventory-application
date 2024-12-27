@@ -1,0 +1,127 @@
+/* 
+ * To display tables on mobile
+ * https://css-tricks.com/responsive-data-tables/
+*/
+
+#items .table-wrapper {
+  /* overflow-x: auto; */
+}
+
+#items table {
+  width: 100%;
+  border-collapse: collapse;
+  /* DELETE LATER */
+  /* border: 2px solid purple; */
+}
+
+@media screen and (max-width: 480px) {
+  table,
+  thead,
+  tbody,
+  th,
+  td,
+  tr {
+    display: block;
+  }
+
+  #items table > thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+
+  #items table tr {
+    border: 1ps solid #ccc;
+  }
+
+  #items table th[scope="row"],
+  #items table td {
+    border: none;
+    border-bottom: 1px solid #eee;
+    position: relative;
+    padding-left: 50%;
+  }
+
+  #items table th[scope="row"] {
+    text-align: left;
+  }
+
+  #items table th[scope="row"]:before,
+  #items table td:before {
+    position: absolute;
+    left: 0;
+    /* padding-right: 10px; */
+    white-space: nowrap;
+  }
+
+  #items table th[scope="row"]:nth-of-type(1):before {
+    content: "Item name";
+  }
+
+  #items table td:nth-of-type(1):before {
+    content: "UPC";
+  }
+
+  #items table td:nth-of-type(2):before {
+    content: "Quantity";
+  }
+
+  #items table td:nth-of-type(3):before {
+    content: "Unit Price";
+  }
+
+  #items table td:nth-of-type(4):before {
+    content: "Total Price";
+  }
+
+  #items table td:nth-of-type(5):before {
+    content: "Edit";
+  }
+
+  #items table td:nth-of-type(6):before {
+    content: "Delete";
+  }
+}
+
+@media screen and (min-width: 481px) {
+  #items table td {
+    text-align: center;
+  }
+
+  #items table th[role="columnheader"] {
+    padding-bottom: 1rem;
+  }
+
+  #items table .category-item:nth-child(even) {
+    background-color: rgba(225, 225, 225, 0.5);
+  }
+
+  #items table .category-item > * {
+    padding: 0.5rem 0;
+  }
+
+  #items table td.cell-edit > a,
+  #items table td.cell-delete > a {
+    display: inline-flex;
+    /* justify-content: center; */
+    vertical-align: middle;
+  }
+
+  /* Selects elements in the first column */
+  #items table th[scope="col"]:first-of-type,
+  #items table th[scope="row"]:first-of-type {
+    text-align: left;
+  }
+
+  /* Selects elements in the last column */
+  #items table th[scope="col"]:nth-last-of-type(-n + 2),
+  #items table td:nth-last-of-type(-n + 2) {
+    text-align: right;
+  }
+}
+
+@media screen and (min-width: 768px) {
+}
+
+@media screen and (min-width: 1024px) {
+}

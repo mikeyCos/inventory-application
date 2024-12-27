@@ -1,14 +1,17 @@
-<article>
-  <p>name: <%= name %></p>
-  <p>upc: <%= upc %></p>
-  <p>quantity: <%= quantity %></p>
-  <p>unit price: <%= price %></p>
-  <p>total price: <%= (price * quantity) %></p>
-  <a href="/item/delete/<%= upc %>/<%= category %>">
-    <%- include("../../public/assets/icons/delete.svg") %>
-  </a>
-  <a href="/item/edit/<%= upc %>/<%= category %>">
-    <%- include("../../public/assets/icons/edit.svg") %>
-  </a>
-
-</article>
+<tr class="category-item" role="row">
+  <th scope="row"><%= name %></th>
+  <td role="cell"><%= upc %></td>
+  <td role="cell"><%= quantity ?? 0 %></td>
+  <td role="cell"><%= (+price ?? 0).toFixed(2) %></td>
+  <td role="cell"><%= (price * quantity).toFixed(2) %></td>
+  <td role="cell" class="cell-edit">
+    <a href="/item/edit/<%= upc %>/<%= category %>">
+      <%- include("../../public/assets/icons/edit.svg") %>
+    </a>
+  </td>
+  <td role="cell" class="cell-delete">
+    <a href="/item/delete/<%= upc %>/<%= category %>">
+      <%- include("../../public/assets/icons/delete.svg") %>
+    </a>
+  </td>
+</tr>

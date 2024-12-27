@@ -1,8 +1,25 @@
 <section id="items">
   <% if (items.length) { %>
-    <% items.map((item) => { %>
-      <%- include('./item', item) %>
-    <% }) %>
+    <div class="table-wrapper">
+      <table>
+        <thead role="rowgroup">
+          <tr role="row">
+            <th scope="col" role="columnheader">Item name</th>
+            <th scope="col" role="columnheader">UPC</th>
+            <th scope="col" role="columnheader">Quantity</th>
+            <th scope="col" role="columnheader">Unit Price</th>
+            <th scope="col" role="columnheader">Total Price</th>
+            <th scope="col" role="columnheader">Edit</th>
+            <th scope="col" role="columnheader">Delete</th>
+          </tr>
+        </thead>
+        <tbody role="rowgroup">
+          <% items.map((item) => { %>
+            <%- include('./item', item) %>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
   <% } else { %>
     <p>There are no items assigned to the <%= category %> category.</p>
   <% } %>

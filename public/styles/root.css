@@ -20,57 +20,18 @@ body {
 }
 
 main {
-  padding: 0 2rem;
+  /* padding: 0 2rem; */
+  /* padding: 2rem 0; */
+  /* DELETE LATER */
+  background-color: lightgray;
+  border: 2px solid rgb(0, 255, 0);
 }
 
-main > section > form {
-  max-width: 500px;
+main > section {
+  height: 100%;
+  max-width: 1000px;
   margin: auto;
-  display: flex;
-  flex-direction: column;
-}
-
-main > section > form > button[type="submit"] {
-  margin-left: auto;
-  margin-top: 1rem;
-  background-color: #ff5207;
-  padding: 0.25rem 1rem;
-  border-radius: 0.25rem;
-}
-
-main > section > form > ul > li {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 1rem;
-}
-
-main > section > form input {
-  border: none;
-  border-radius: 0.25rem;
-  padding: 0.25rem 0.5rem;
-}
-
-#add-item > form > ul,
-#edit-item > form > ul,
-#delete-item > form > ul {
-  display: flex;
-  flex-wrap: wrap;
-  column-gap: 4%;
-}
-
-#add-item > form > ul > li,
-#edit-item > form > ul > li,
-#delete-item > form > ul > li {
-  flex-basis: 100%;
-}
-
-#add-item > form > ul > :nth-last-child(-n + 2),
-#edit-item > form > ul > :nth-last-child(-n + 2),
-#delete-item > form > ul > :nth-last-child(-n + 3) {
-  /* background-color: yellow; */
-  flex-basis: 48%;
-}
-
-#delete-item > form > ul > :nth-last-child(1) {
-  flex-basis: 100%;
+  /* DELETE LATER */
+  background-color: lightpink;
+  border: 2px solid black;
 }

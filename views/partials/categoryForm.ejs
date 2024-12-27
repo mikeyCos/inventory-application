@@ -1,20 +1,20 @@
 <form action="/<%= path %>" method="post">
   <h2><%= action %> Category</h2>
   <ul>
-    <li>
+    <li class="form-item">
       <label for="category">Category</label>
       <input id="category" name="category" type="text" value="<%= locals.inputs?.category ?? '' %>" <%= locals.action === 'delete' ? 'readonly' : '' %>>
       <% if (locals.errors?.category) { %>
-        <p><%= errors.category.msg %></p>
+        <p class="input-error"><%= errors.category.msg %></p>
       <% } %>
     </li>
 
     <% if (locals.password) { %>
-      <li>
+      <li class="form-item">
         <label for="password">Password</label>
         <input id="password" name="password" type="password">
         <% if (locals.errors?.password) { %>
-          <p><%= errors.password.msg %></p>
+          <p class="input-error"><%= errors.password.msg %></p>
         <% } %>
       </li>
     <% } %>
