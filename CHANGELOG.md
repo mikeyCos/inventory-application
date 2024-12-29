@@ -1,5 +1,12 @@
 # Changelog
 ---
+### 29 DEC 2024
+- 
+---
+### 28 DEC 2024
+- Navigation items get an 'active' class depending on the pages' title.
+- Fixed `path` variable when an error occurs during `postAddCategory`; changed `path` value from `add/category` to `category/add`.
+---
 ### 27 DEC 2024
 - Added `Inter` variable Google Font in `fonts` subdirectory.
 - For mobile devices, item inputs are the length of page.

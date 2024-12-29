@@ -10,20 +10,20 @@
 
     <ul class="nav-right">
       <li class="nav-item">
-        <a href="/">Home</a>
+        <a href="/home" class="<%= title === 'Home' ? 'active' : '' %>">Home</a>
       </li>
 
       <li class="nav-item drop-down">
-        <a href="/categories">Categories</a>
+        <a href="/categories" class="<%= title === 'Categories' ? 'active' : '' %>">Categories</a>
         <%- locals.categories && include('./categories', { categories }) %>
       </li>
 
       <li class="nav-item">
-        <a href="/category/add">Add Category</a>
+        <a href="/category/add" class="<%= title === 'Add Category' ? 'active' : '' %>">Add Category</a>
       </li>
 
       <li class="nav-item">
-        <a href="/item/add">Add item</a>
+        <a href="/item/add" class="<%= title === 'Add Item' ? 'active' : '' %>">Add item</a>
       </li>
     </ul>
   </nav>

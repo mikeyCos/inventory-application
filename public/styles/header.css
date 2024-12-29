@@ -22,14 +22,16 @@ nav > ul {
 nav .categories-nav {
   display: none;
   position: absolute;
+  top: 100%;
 }
 
 nav .nav-item > a {
+  position: relative;
   display: block;
   padding: 0.5rem;
   text-align: center;
   white-space: nowrap;
-  font-size: clamp(1rem, 1.15vw, 2rem);
+  font-weight: 600;
 }
 
 nav .nav-item > a:hover {
@@ -38,19 +40,26 @@ nav .nav-item > a:hover {
 
 .drop-down {
   position: relative;
+  display: flex;
+  justify-content: center;
 }
 
 .drop-down:hover .categories-nav,
 .drop-down > .categories-nav:hover {
   display: flex;
-  /* justify-content: center; */
-  width: 100%;
-  background-color: var(--bkg-color-secondary);
+  justify-content: center;
+  /* width: 100%; */
+  /* width: max-content; */
+  background-color: var(--bkg-color-tertiary);
   z-index: 999;
 }
 
+.drop-down > .categories-nav a:hover {
+  background-color: var(--bkg-color-secondary);
+}
+
 .drop-down > .categories-nav > ul {
-  width: inherit;
+  /* width: inherit; */
 }
 
 .drop-down > .categories-nav > ul > li {
@@ -63,9 +72,13 @@ nav .nav-item > a:hover {
   padding: var(--category-padding);
 }
 
-nav .nav-right a.active {
-  /* How to make this work? */
-  color: lightsalmon;
+nav .nav-right .nav-item > a.active::after {
+  position: absolute;
+  left: 25%;
+  bottom: 10%;
+  content: "";
+  width: 50%;
+  border-bottom: 4px dotted var(--bkg-color-quaternary, black);
 }
 
 /* Small devices */

@@ -7,6 +7,7 @@ indexRouter.all("/", (req, res, next) => {
   console.log("indexRouter.all running...");
   next();
 });
-indexRouter.get("/", getIndex);
+
+indexRouter.get(["/", "/home"], getIndex);
 
 module.exports = indexRouter;

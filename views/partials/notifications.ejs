@@ -4,6 +4,9 @@
 */%>
 
 <div class="notifications active">
-  
-  <p>Success notification!</p>
+  <% if(locals.success) { %>
+    <p><%= success.msg %></p>
+  <% } else { %>
+    <p>Success notification!</p>
+  <% } %>
 </div>

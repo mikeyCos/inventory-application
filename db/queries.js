@@ -59,6 +59,7 @@ const getItems = async ({ category }) => {
 
 const insertCategory = async ({ category }) => {
   // What if category already exists?
+  console.log("insertCategory running...");
   await pool.query(
     `
       INSERT INTO categories (category)
@@ -66,6 +67,7 @@ const insertCategory = async ({ category }) => {
       `,
     [category]
   );
+  console.log("insertCategory finished...");
 };
 
 const insertItem = async ({ category, name, upc, quantity, price }) => {

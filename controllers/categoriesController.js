@@ -64,6 +64,7 @@ const categoriesController = {
       title: "Add Category",
       action: "add",
       path: "category/add",
+      active: true,
       ...(added && { success: { msg: `${category} category added` } }),
     });
   }),
@@ -104,19 +105,18 @@ const categoriesController = {
     asyncHandler(async (req, res) => {
       console.log("postAddCategory running...");
       console.log("req.path:", req.path);
-      console.log("req.route:", req.route);
       console.log("req.baseUrl:", req.baseUrl);
       const errors = validationResult(req);
 
       if (!errors.isEmpty()) {
         const localErrors = errors.mapped();
-
+        console.log("localErrors:", localErrors);
         return res.status(400).render("addCategory", {
           title: "Add Category",
           errors: { ...localErrors },
           inputs: { ...req.body },
           action: "add",
-          path: "add/category",
+          path: "category/add",
         });
       }
 
