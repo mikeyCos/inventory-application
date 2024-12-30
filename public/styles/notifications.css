@@ -1,29 +1,36 @@
 .notifications {
   display: flex;
   justify-content: center;
-  /* margin: 0 25%; */
-  /* width: 50%; */
   text-align: center;
   background-color: var(--bkg-color-quaternary);
   visibility: hidden;
-  /* max-height: 0; */
+  max-height: 0;
   padding: 0;
+  opacity: 0;
+  transform: translateY(-999%);
+  transition: all 150ms, transform 1000ms, padding 500ms 50ms ease-out;
 }
 
 .notifications.active {
-  visibility: visible;
   max-height: max-content;
+  visibility: visible;
   padding: 1rem;
+  opacity: 1;
+  transform: translateY(0%);
 }
 
-.notifications.active > p {
+.notifications > p {
   max-width: 1000px;
   padding: 0.5rem 1rem;
+}
+
+.notifications > p::first-letter {
+  text-transform: capitalize;
 }
 
 /* Tablets */
 @media screen and (min-width: 768px) {
   .notifications {
-    padding: 2rem;
+    /* padding: 2rem; */
   }
 }

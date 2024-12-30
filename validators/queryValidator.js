@@ -40,8 +40,9 @@ const { getCategory, getItem } = require("../db/queries");
 // If "success" query exists and it's value equals 'true'
 // Then only "category" or "upc" must be valid
 // How to handle invalid query keys?
-const validateQuery = [
+/* const validateQuery = [
   query("success")
+    .if(query("category").exists() || query("upc").exists())
     .custom(async (value) => {
       console.log("validating success query...");
       console.log("value:", value);
@@ -54,27 +55,51 @@ const validateQuery = [
       // success must === 'true'
       // return value === "true";
       if (value !== "true") throw new Error("Invalid success query");
-    })
-    .optional(),
+    }),
   oneOf(
     [
-      query("category")
-        .if(query("success").exists())
-        .custom(async (category) => {
-          console.log("validating category query...");
-          const categoryExists = await getCategory({ category });
-          if (!categoryExists) throw new Error("Invalid category query");
-        }),
-      query("upc")
-        .if(query("success").exists())
-        .custom(async (upc) => {
-          console.log("validating upc query...");
-          const itemExists = await getItem({ upc });
-          if (!itemExists) throw new Error("Invalid upc query");
-        }),
+      query("category").custom(async (category) => {
+        console.log("validating category query...");
+        const categoryExists = await getCategory({ category });
+        if (!categoryExists) throw new Error("Invalid category query");
+      }),
+      query("upc").custom(async (upc) => {
+        console.log("validating upc query...");
+        const itemExists = await getItem({ upc });
+        if (!itemExists) throw new Error("Invalid upc query");
+      }),
     ],
     { message: "Invalid category or UPC query" }
   ),
+]; */
+
+const actions = {};
+
+// If "action" query exists and it's value equals 'add', 'edit', or 'delete'
+// Then only "category" or "upc" must be valid
+// How to handle invalid query keys?
+const validateQuery = [
+  query("action")
+    .trim()
+    .custom((value) => {
+      // action's value can be 'add', 'edit', 'delete'
+      const regex = new RegExp("(add|edit|delete)");
+      const result = regex.test(value);
+      console.log("result:", result);
+      return result;
+    }),
 ];
+
+/* const validateQueryChain = [
+  query().custom((value) => {
+    console.log(value);
+  }),
+];
+
+const validateQuery = (req, res, next) => {
+  console.log("validateQuery running...");
+
+  next();
+}; */
+
 module.exports = validateQuery;
-query("success");

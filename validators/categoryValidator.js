@@ -10,7 +10,7 @@ const validateCategory = [
     .isAlpha()
     .withMessage("Category must only contain letters.")
     .bail()
-    .custom(async (value) => {
+    .custom(async (value, { req }) => {
       console.log("validateCategory running...");
       // Is it okay to 'define' an object in a function call?
       const category = await getCategory({ category: value });

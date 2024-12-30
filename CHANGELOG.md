@@ -1,7 +1,12 @@
 # Changelog
 ---
-### 29 DEC 2024
+### 30 DEC 2024
 - 
+---
+### 29 DEC 2024
+- Defined a `transition` CSS property for the notifications element; fades and shrinks after two seconds.
+- Included `validateCategory` in `postEditCategory` middleware array.
+- Changed `success` local variable to `action` with a string value; the string value can be `add`/`edit`/`delete`.
 ---
 ### 28 DEC 2024
 - Navigation items get an 'active' class depending on the pages' title.

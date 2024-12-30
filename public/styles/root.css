@@ -2,6 +2,8 @@
  * Define font-face(s) here
  * Define custom variables here
  * Define general styling here
+ * Used a color palette generator to find a color scheme
+ * https://colorhunt.co/palette/
  */
 
 @font-face {
@@ -30,8 +32,9 @@ body {
 
 main {
   /* padding: 0 2rem; */
-  /* padding: 2rem 0; */
-  margin-top: 1rem;
+  padding: 2rem 0;
+  /* margin-top: 1rem; */
+  /* margin: 1rem 0; */
   /* DELETE LATER */
 }
 

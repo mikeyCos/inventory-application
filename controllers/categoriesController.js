@@ -20,12 +20,14 @@ const categoriesController = {
     console.log("req.params:", req.params);
     console.log("req.body:", req.body);
 
-    const { edited, deleted, category } = req.query;
-    const msg = `${category} category ${edited ? `updated` : `deleted`}`;
+    const { action, category } = req.query;
+    const msg = `${category} category ${
+      action === "edit" ? `updated` : `deleted`
+    }`;
 
     res.render("categories", {
       title: "Categories",
-      ...((edited ?? deleted) && { success: { msg } }),
+      ...(action && { success: { msg } }),
     });
   }),
   getCategoryItems: asyncHandler(async (req, res) => {
@@ -34,41 +36,58 @@ const categoriesController = {
     console.log("req.params:", req.params);
     const { category } = req.params;
     const items = await getItems(req.params);
-    const { edited, deleted, upc } = req.query;
+    const { action, upc } = req.query;
 
     // What if category does not exist
     // Is a try...catch block needed?
     // What if item is edited?
     //  How to check what has changed
     // What if item is deleted?
-    const msg = `${upc} item ${edited ? `updated` : `deleted`}`;
+    const msg = `${upc} item ${action === "edit" ? `updated` : `deleted`}`;
     console.log("items:", items);
     res.render("category", {
       title: category,
       category,
       items,
-      ...((edited ?? deleted) && { success: { msg } }),
+      ...(action && { success: { msg } }),
     });
   }),
-  getAddCategory: asyncHandler(async (req, res, next) => {
-    console.log("getAddCategory running...");
-    console.log("req.originalUrl:", req.originalUrl);
-    console.log("req.query:", req.query);
-    console.log("req.path:", req.path);
-    // Is a try...catch block needed?
-    // What if req.success is a value other than 'true'?
-    // What if category is not in the database?
-
-    const { added, category } = req.query;
-    res.render("addCategory", {
-      title: "Add Category",
-      action: "add",
-      path: "category/add",
-      active: true,
-      ...(added && { success: { msg: `${category} category added` } }),
+  getAddCategory: [
+    validateQuery,
+    asyncHandler(async (req, res, next) => {
+      console.log("getAddCategory running...");
+      console.log("req.originalUrl:", req.originalUrl);
+      console.log("req.query:", req.query);
+      console.log("req.path:", req.path);
+      // Is a try...catch block needed?
+      // What if req.success is a value other than 'true'?
+      // What if category is not in the database?
+      const errors = validationResult(req);
+      console.log("getAddCategory errors:", errors);
+      const { action, category } = req.query;
+      res.render("addCategory", {
+        title: "Add Category",
+        action: "add",
+        path: "category/add",
+        active: true,
+        ...(action && { success: { msg: `${category} category added` } }),
+      });
+    }),
+  ],
+  getEditCategory: asyncHandler(async (req, res) => {
+    console.log("getEditCategory running...");
+    console.log("req.url:", req.url);
+    console.log("req.params:", req.params);
+    const { category } = req.params;
+    console.log(`edit/category/${category}`);
+    res.render("editCategory", {
+      title: "Edit Category",
+      inputs: { category },
+      password: true,
+      action: "edit",
+      path: `category/edit/${category}`,
     });
   }),
-
   getDeleteCategory: asyncHandler(async (req, res) => {
     console.log("getDeleteCategory running...");
     console.log("req.url:", req.url);
@@ -84,20 +103,6 @@ const categoriesController = {
       password: true,
       action: "delete",
       path: `category/delete/${category}`,
-    });
-  }),
-  getEditCategory: asyncHandler(async (req, res) => {
-    console.log("getEditCategory running...");
-    console.log("req.url:", req.url);
-    console.log("req.params:", req.params);
-    const { category } = req.params;
-    console.log(`edit/category/${category}`);
-    res.render("editCategory", {
-      title: "Edit Category",
-      inputs: { category },
-      password: true,
-      action: "edit",
-      path: `category/edit/${category}`,
     });
   }),
   postAddCategory: [
@@ -124,12 +129,13 @@ const categoriesController = {
       await insertCategory({ category });
       // Redirect to the "add category" page
       // Render successful message
-      res.redirect(`/category/add?added=true&category=${category}`);
+      res.redirect(`/category/add?action=add&category=${category}`);
 
       // res.redirect(`/category/add`);
     }),
   ],
   postEditCategory: [
+    validateCategory,
     validatePassword,
     asyncHandler(async (req, res) => {
       console.log("postEditCategory running...");
@@ -155,7 +161,7 @@ const categoriesController = {
       await updateCategory({ prevCategory: category, newCategory });
       // Redirect to the categories page
       // Render successful message
-      res.redirect(`/categories?edited=true&category=${category}`);
+      res.redirect(`/categories?action=edit&category=${category}`);
     }),
   ],
   postDeleteCategory: [
@@ -187,7 +193,7 @@ const categoriesController = {
       await deleteCategory({ category }, updateItems);
       // Redirect to the categories page
       // Render successful message
-      res.redirect(`/categories?deleted=true&category=${category}`);
+      res.redirect(`/categories?action=delete&category=${category}`);
     }),
   ],
 };

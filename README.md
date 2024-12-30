@@ -157,7 +157,7 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 - [ ] Build a request query parameter validator.
 - [ ] Build search item by category or upc functionality.
 - [ ] Divide items table into separate tables; prices, quantities, locations.
-- [ ] Build edit/delete forms on the `categories` page; toggled by edit/delete/cancel/submit buttons. 
+- [ ] Build edit/delete forms on the `categories` page; toggled by edit/delete/cancel/submit buttons.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
