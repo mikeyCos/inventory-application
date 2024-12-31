@@ -1,0 +1,5 @@
+/* For index.ejs */
+
+#home > :first-child {
+  margin-bottom: 1rem;
+}

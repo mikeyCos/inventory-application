@@ -40,7 +40,7 @@ const validateItem = [
       if (req.body.password !== undefined) {
         if (item && item.upc !== req.params.upc) {
           throw new Error(
-            "The UPC you entered belongs to an existing item, please edit that item instead."
+            "The UPC you entered belongs to an existing item, please edit that item instead or change the UPC."
           );
         }
       } else {

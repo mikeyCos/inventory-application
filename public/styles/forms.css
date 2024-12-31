@@ -12,6 +12,14 @@ main > section > form > h2 {
   text-transform: capitalize;
 }
 
+main > section > form > ul {
+  margin-top: 1rem;
+}
+
+main > section > form .asterisk {
+  color: red;
+}
+
 main > section > form > button[type="submit"] {
   margin-left: auto;
   margin-top: 1rem;
@@ -47,6 +55,8 @@ main > section > form > button[type="submit"]:hover {
 }
 
 #add-category > form label:after,
+#edit-category > form label:after,
+#delete-category > form label:after,
 #add-item form .form-item:nth-of-type(-n + 3) label:after {
   content: "*";
   color: red;

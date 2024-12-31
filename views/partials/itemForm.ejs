@@ -1,5 +1,6 @@
 <form action="/<%= path %>" method="post">
   <h2><%= action %> Item</h2>
+  <p>Fields marked with an asterisk (*) are required.</p>
   <ul>
     <li class="form-item">
       <label for="category">Category</label>
@@ -27,7 +28,7 @@
     
     <li class="form-item">
       <label for="quantity">Quantity</label>
-      <input id="quantity" name="quantity" type="number" value="<%= locals.inputs?.quantity ?? '' %>" <%= locals.action === 'delete' ? "readonly" : '' %>>
+      <input id="quantity" name="quantity" type="number" min="0" value="<%= locals.inputs?.quantity ?? '' %>" <%= locals.action === 'delete' ? "readonly" : '' %>>
       <% if (locals.errors?.quantity) { %>
         <p class="input-error"><%= errors.quantity.msg %></p>
       <% } %>

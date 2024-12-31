@@ -1,7 +1,9 @@
 # Changelog
 ---
 ### 30 DEC 2024
-- 
+- Removed `category` and `upc` from `req.query` after a successful `POST` request.
+- The message that renders after a successful `POST` request no longer includes a category or UPC.
+- Created `home.css` style sheet.
 ---
 ### 29 DEC 2024
 - Defined a `transition` CSS property for the notifications element; fades and shrinks after two seconds.
