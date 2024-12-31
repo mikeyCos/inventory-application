@@ -26,6 +26,7 @@ main > section > form > button[type="submit"] {
   background-color: var(--bkg-color-tertiary);
   padding: 0.25rem 1rem;
   border-radius: 0.25rem;
+  text-transform: capitalize;
 }
 
 main > section > form > button[type="submit"]:hover {
@@ -54,15 +55,13 @@ main > section > form > button[type="submit"]:hover {
   pointer-events: none;
 }
 
+/* There has to be a better way to select required inputs */
 #add-category > form label:after,
 #edit-category > form label:after,
 #delete-category > form label:after,
-#add-item form .form-item:nth-of-type(-n + 3) label:after {
-  content: "*";
-  color: red;
-}
-
-#edit-item form .form-item:nth-of-type(-n + 3) label:after {
+#add-item form .form-item:nth-of-type(-n + 3) label:after,
+#edit-item form .form-item label:not([for="quantity"], [for="price"]):after,
+#delete-item form .form-item:last-of-type label:after {
   content: "*";
   color: red;
 }

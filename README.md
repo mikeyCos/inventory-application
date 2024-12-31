@@ -28,25 +28,24 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/mikeyCos/cv-application">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+  <a href="https://inventory-application-mikey-cos.fly.dev/">
+    <img src="./demo/media/project_screenshot_00.png" alt="Logo" width="auto" height="auto">
   </a>
 
 <h3 align="center">ProjectName</h3>
 
   <p align="center">
-    project_description
+    Inventory Application with CRUD methods and form validation.
     <br />
-    <a href="https://github.com/github_username/repo_name"><strong>Explore the docs »</strong></a>
-    <br />
-    <br />
-    <a href="https://github.com/github_username/repo_name">Live Preview</a>
+    <a href="https://inventory-application-mikey-cos.fly.dev/">Live Preview</a>
     ·
+    <a href="./PROJECT_SPECIFICATIONS.md">Project Specifications</a>
+    <!-- ·
     <a href="https://github.com/github_username/repo_name/issues/new?labels=bug&template=bug-report---.md">Report Bug</a>
     ·
-    <a href="https://github.com/github_username/repo_name/issues/new?labels=enhancement&template=feature-request---.md">Request Feature</a>
+    <a href="https://github.com/github_username/repo_name/issues/new?labels=enhancement&template=feature-request---.md">Request Feature</a> -->
     ·
-    <a href="https://github.com/mikeyCos/cv-application/blob/main/CHANGELOG.md">Changelog</a>
+    <a href="https://github.com/mikeyCos/inventory-application/blob/main/CHANGELOG.md">Changelog</a>
   </p>
 </div>
 
@@ -69,8 +68,8 @@
     </li>
     <li><a href="#usage">Usage</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#contact">Contact</a></li>
+    <!-- <li><a href="#contributing">Contributing</a></li>
+    <li><a href="#contact">Contact</a></li> -->
     <li><a href="#acknowledgments">Acknowledgments</a></li>
     <li><a href="#questions">Questions</a></li>
   </ol>
@@ -80,7 +79,7 @@
 
 ## About The Project
 
-[![CV Application Screen Shot][product-screenshot]](https://example.com)
+[![Inventory Application Screen Shot][product-screenshot]](https://example.com)
 
 Project: ProjectName
 
@@ -94,8 +93,11 @@ To failing forward, cheers!
 
 ### Built With
 
-- [![React][React.js]][React-url]
-- [![JavaScript][JavaScript.js]][JavaScript-url]
+[![JavaScript][JavaScript.js]][JavaScript-url]
+[![Node][NodeJS]][NodeJS-url]
+[![Express][Express.js]][Express-url]
+[![EJS][EJS]][EJS-url]
+[![CSS3][CSS3]][CSS3-url]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -103,25 +105,20 @@ To failing forward, cheers!
 
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
 To get a local copy up and running follow these simple example steps.
 
 ### Prerequisites
 
-This is a list of things you need to use the software and how to install them.
-
-- npm
+This is an example of how to list things you need to use the software and how to install them.
+* npm
   ```sh
   npm install npm@latest -g
   ```
 
 ### Installation
 
-1. Create repository
-    - Option 1:
-      1. Go to [module-react-starter repository](https://github.com/mikeyCos/module-react-starter) on GitHub and click 'Use this template' button or click [Create a new repository](https://github.com/new?template_name=module-react-starter&template_owner=mikeyCos).
-    - Option 2:
-      1. Clone [module-react-starter repository](https://github.com/mikeyCos/module-react-starter) using HTTPS/SSH/GitHub CLI; [more on cloning a repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository).
+1. Clone repository
+      1. Clone [inventory-application repository](https://github.com/mikeyCos/inventory-application) using HTTPS/SSH/GitHub CLI; [more on cloning a repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository).
       2. Navigate to cloned repository.
       3. Remove `.git` folder.
       4. Run `git init`.
@@ -139,7 +136,7 @@ This is a list of things you need to use the software and how to install them.
 
 Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
 
-_For more examples, please refer to the [Documentation](https://example.com)_
+_For more examples, please refer to the [Demo](./demo/DEMO.md)_
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -158,6 +155,8 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 - [ ] Build search item by category or upc functionality.
 - [ ] Divide items table into separate tables; prices, quantities, locations.
 - [ ] Build edit/delete forms on the `categories` page; toggled by edit/delete/cancel/submit buttons.
+- [ ] Allow user to type in category input and have a drop down select for existing categories.
+- [ ] Build undo functionality.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -176,8 +175,8 @@ Project Link: [https://github.com/mikeyCos/cv-application](https://github.com/mi
 ## Acknowledgments
 
 - [Best README Template](https://github.com/othneildrew/Best-README-Template)
-- []()
-- []()
+<!-- - []() -->
+<!-- - []() -->
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -207,7 +206,6 @@ Project Link: [https://github.com/mikeyCos/cv-application](https://github.com/mi
 [license-url]: https://github.com/github_username/repo_name/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/linkedin_username
-[product-screenshot]: images/screenshot.png
 [Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
 [Next-url]: https://nextjs.org/
 [React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
@@ -226,3 +224,12 @@ Project Link: [https://github.com/mikeyCos/cv-application](https://github.com/mi
 [JQuery-url]: https://jquery.com
 [JavaScript-url]: https://www.javascript.com/
 [JavaScript.js]: https://img.shields.io/badge/javascript-20232A?style=for-the-badge&logo=javascript
+[NodeJS]: https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white
+[NodeJS-url]: https://nodejs.org/en
+[Express.js]: https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB
+[Express-url]: https://expressjs.com/
+[EJS]: https://img.shields.io/badge/ejs-%23B4CA65.svg?style=for-the-badge&logo=ejs&logoColor=black
+[EJS-url]: https://ejs.co/
+[CSS3]: https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white
+[CSS3-url]: https://www.w3.org/TR/2001/WD-css3-roadmap-20010523/
+[product-screenshot]: ./demo/media/project_screenshot_01.png

@@ -3,7 +3,7 @@ const hideNotifications = async () => {
   const notifications = document.querySelector(".notifications");
   setTimeout(() => {
     notifications.classList.remove("active");
-  }, 2000);
+  }, 500);
 };
 
 hideNotifications();

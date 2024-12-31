@@ -1,5 +1,13 @@
 # Changelog
 ---
+### 31 DEC 2024
+- Created `demo` subdirectory.
+- Updated `README.md`.
+- All category inputs are required.
+- All item inputs are required except for quantity and unit price.
+- Defined `text-transform: capitalize` for submit buttons.
+- Reduced delay timer in `hideNotifications` function from `2000ms` to `500ms`. 
+---
 ### 30 DEC 2024
 - Removed `category` and `upc` from `req.query` after a successful `POST` request.
 - The message that renders after a successful `POST` request no longer includes a category or UPC.
