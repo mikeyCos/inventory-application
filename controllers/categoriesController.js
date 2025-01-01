@@ -23,49 +23,40 @@ const categoriesController = {
       ...(action && { success: { msg } }),
     });
   }),
-  getCategoryItems: [
-    validateQuery,
-    asyncHandler(async (req, res) => {
-      // Need to select items from category
-      console.log("getCategoryItems running...");
-      const errors = validationResult(req);
-      errors.throw();
-      const { category } = req.params;
-      const items = await getItems(req.params);
-      const { action } = req.query;
+  getCategoryItems: asyncHandler(async (req, res) => {
+    // Need to select items from category
+    console.log("getCategoryItems running...");
+    const { category } = req.params;
+    const items = await getItems(req.params);
+    const { action } = req.query;
 
-      // What if category does not exist
-      // Is a try...catch block needed?
-      // What if item is edited?
-      //  How to check what has changed
-      // What if item is deleted?
-      const msg = `Item ${action === "edit" ? `updated` : `deleted`}`;
-      res.render("category", {
-        title: category,
-        category,
-        items,
-        ...(action && { success: { msg } }),
-      });
-    }),
-  ],
-  getAddCategory: [
-    validateQuery,
-    asyncHandler(async (req, res) => {
-      console.log("getAddCategory running...");
-      // Is a try...catch block needed?
-      // What if req.success is a value other than 'true'?
-      // What if category is not in the database?
-      validationResult(req).throw();
-      const { action } = req.query;
-      res.render("addCategory", {
-        title: "Add Category",
-        action: "add",
-        path: "category/add",
-        active: true,
-        ...(action && { success: { msg: "Category added" } }),
-      });
-    }),
-  ],
+    // What if category does not exist
+    // Is a try...catch block needed?
+    // What if item is edited?
+    //  How to check what has changed
+    // What if item is deleted?
+    const msg = `Item ${action === "edit" ? `updated` : `deleted`}`;
+    res.render("category", {
+      title: category,
+      category,
+      items,
+      ...(action && { success: { msg } }),
+    });
+  }),
+  getAddCategory: asyncHandler(async (req, res) => {
+    console.log("getAddCategory running...");
+    // Is a try...catch block needed?
+    // What if req.success is a value other than 'true'?
+    // What if category is not in the database?
+    const { action } = req.query;
+    res.render("addCategory", {
+      title: "Add Category",
+      action: "add",
+      path: "category/add",
+      active: true,
+      ...(action && { success: { msg: "Category added" } }),
+    });
+  }),
   getEditCategory: asyncHandler(async (req, res) => {
     console.log("getEditCategory running...");
     const { category } = req.params;

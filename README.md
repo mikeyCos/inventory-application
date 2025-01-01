@@ -188,6 +188,8 @@ Project Link: [https://github.com/mikeyCos/cv-application](https://github.com/mi
 2. Are `res.redirect` preferred on `POST` requests after validations return no errors?
 3. Does it make sense to dynamically insert scripts or style sheets into the `head` element? For example, defining a local variable called `styleSheets` that is an array of paths.
 4. When does it make sense to store null values in a table?
+5. Where does it make sense to validate request queries and/or parameters? On the controller or router?
+6. 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

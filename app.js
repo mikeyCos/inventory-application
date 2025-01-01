@@ -32,6 +32,8 @@ app.use(async (req, res, next) => {
   } catch (err) {
     // Table does not exist
     // code: 42P01
+    // Connection error
+    // code: 'ECONNRESET'
     next(err);
   }
 });

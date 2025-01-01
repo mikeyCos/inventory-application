@@ -7,8 +7,9 @@
   max-height: 0;
   padding: 0;
   opacity: 0;
+  overflow: hidden;
   transform: translateY(-999%);
-  transition: all 150ms, transform 1000ms, padding 500ms 50ms ease-out;
+  transition: all 250ms, transform 5000ms, padding 500ms ease-out;
 }
 
 .notifications.active {

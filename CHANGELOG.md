@@ -1,5 +1,12 @@
 # Changelog
 ---
+### 01 JAN 2024
+- Applied `overflow: hidden` CSS property to the notifications elements.
+- Moved `validateQuery` from the categories' controller level to the categories' router level.
+- Created `paramsValidator.js` module which validates `category` and `upc` request parameters. Currently, the middleware is called in `get` requests in `itemsRouter.js` and `categoriesRouter.js` modules.
+- Wrapped `.drop-down:hover .categories-nav` and `.drop-down > .categories-nav:hover` in a `@media (hover: hover)` rule.
+- Changed `grid-template-columns` value from `repeat(auto-fill, minmax(200px, 1fr))` to `repeat(auto-fit, minmax(200px, 1fr))`.
+---
 ### 31 DEC 2024
 - Created `demo` subdirectory.
 - Updated `README.md`.

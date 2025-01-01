@@ -44,22 +44,8 @@ nav .nav-item > a:hover {
   justify-content: center;
 }
 
-.drop-down:hover .categories-nav,
-.drop-down > .categories-nav:hover {
-  display: flex;
-  justify-content: center;
-  /* width: 100%; */
-  /* width: max-content; */
-  background-color: var(--bkg-color-tertiary);
-  z-index: 999;
-}
-
 .drop-down > .categories-nav a:hover {
   background-color: var(--bkg-color-secondary);
-}
-
-.drop-down > .categories-nav > ul {
-  /* width: inherit; */
 }
 
 .drop-down > .categories-nav > ul > li {
@@ -79,6 +65,16 @@ nav .nav-right .nav-item > a.active::after {
   content: "";
   width: 50%;
   border-bottom: 4px dotted var(--bkg-color-quaternary, black);
+}
+
+@media (hover: hover) {
+  .drop-down:hover .categories-nav,
+  .drop-down > .categories-nav:hover {
+    display: flex;
+    justify-content: center;
+    background-color: var(--bkg-color-tertiary);
+    z-index: 999;
+  }
 }
 
 /* Small devices */
