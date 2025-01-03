@@ -1,6 +1,11 @@
 # Changelog
 ---
-### 01 JAN 2024
+### 02 JAN 2025
+- Updated README.md.
+- Updated DEMO.md.
+- Added `delete_item.gif`, `edit_item.gif`, and `overview.gif` to the `demo/media` directory.
+---
+### 01 JAN 2025
 - Applied `overflow: hidden` CSS property to the notifications elements.
 - Moved `validateQuery` from the categories' controller level to the categories' router level.
 - Created `paramsValidator.js` module which validates `category` and `upc` request parameters. Currently, the middleware is called in `get` requests in `itemsRouter.js` and `categoriesRouter.js` modules.

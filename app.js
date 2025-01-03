@@ -46,16 +46,11 @@ app.use(["/item"], itemsRouter);
 
 // Middleware when no routes match
 app.use((req, res) => {
-  console.log("404");
-  console.log("req.url:", req.url);
   res.render("404", { title: "404 - Page Not Found" });
 });
 
 // Error-handling
 app.use((err, req, res, next) => {
-  console.log("error middleware running...");
-  console.log("err:", err);
-  console.log("req.url:", req.url);
   res.render("404", { title: "404 - Page Not Found" });
 });
 

@@ -13,7 +13,6 @@ const validatePassword = require("../validators/passwordValidator");
 
 const itemsController = {
   getAddItem: asyncHandler(async (req, res) => {
-    console.log("getAddItem running...");
     const { action } = req.query;
 
     res.render("addItem", {
@@ -24,7 +23,6 @@ const itemsController = {
     });
   }),
   getEditItem: asyncHandler(async (req, res) => {
-    console.log("getEditItem running...");
     const item = await getItem(req.params);
 
     const { upc, category } = req.params;
@@ -37,7 +35,6 @@ const itemsController = {
     });
   }),
   getDeleteItem: asyncHandler(async (req, res) => {
-    console.log("getDeleteItem running...");
     const item = await getItem(req.params);
     const { category, upc } = req.params;
 
@@ -52,7 +49,6 @@ const itemsController = {
   postAddItem: [
     validateItem,
     asyncHandler(async (req, res) => {
-      console.log("postAddItem running...");
       const errors = validationResult(req);
 
       if (!errors.isEmpty()) {
@@ -87,7 +83,6 @@ const itemsController = {
     validateItem,
     validatePassword,
     asyncHandler(async (req, res) => {
-      console.log("postEditItem running...");
       const errors = validationResult(req);
       const { upc, category } = req.params;
 

@@ -27,8 +27,6 @@ const getCategory = async ({ category, category_id }) => {
 
 const getItem = async ({ upc }) => {
   // Performs a nested destructure to get the first item of the rows array
-  console.log("getItem query running...");
-  console.log("upc:", upc);
   const {
     rows: [item],
   } = await pool.query(
@@ -59,7 +57,6 @@ const getItems = async ({ category }) => {
 
 const insertCategory = async ({ category }) => {
   // What if category already exists?
-  console.log("insertCategory running...");
   await pool.query(
     `
       INSERT INTO categories (category)
@@ -67,51 +64,9 @@ const insertCategory = async ({ category }) => {
       `,
     [category]
   );
-  console.log("insertCategory finished...");
 };
 
 const insertItem = async ({ category, name, upc, quantity, price }) => {
-  // What if item (based on UPC) already exists?
-  // What if item (based on UPC) already exists and the category is different?
-  // Need to assign the corresponding category id from the categories table
-  // If there is no category, category will be 'unassigned'
-
-  // If category exists and upc does not exist
-  //  Insert item and select category
-  /* 
-      INSERT INTO items (category_id, name, upc, quantity, price)
-      VALUES ((SELECT id FROM categories WHERE category = LOWER($1)), $2, $3, $4, $5);
-    */
-  // If category does not exist and upc exists
-  //  Insert category into the categories table
-  //  Update item
-  /* 
-      INSERT INTO categories (category)
-      VALUES (LOWER($1));
-      UPDATE items
-      SET category_id = (SELECT category_id FROM categories WHERE category = LOWER($1))
-      WHERE upc = $3;
-     */
-  // If category and upc both exist
-  //  Update item
-  /* 
-      UPDATE items
-      SET category_id = (SELECT category_id FROM categories WHERE category = LOWER($1))
-      WHERE upc = $3;
-    */
-  // If category and upc both do not exist
-  //  Insert category into the categories table
-  //  Insert item
-  /*
-      INSERT INTO categories (category)
-      VALUES (LOWER($1));
-      INSERT INTO items (category_id, name, upc, quantity, price)
-      VALUES ((SELECT category_id FROM categories WHERE category = LOWER($1)), $2, $3, $4, $5);
-    */
-  console.log("insertItem running...");
-  console.log("category:", category);
-  console.log("upc:", upc);
-
   await pool.query(
     `
       INSERT INTO items (category_id, name, upc, quantity, price)
@@ -119,12 +74,9 @@ const insertItem = async ({ category, name, upc, quantity, price }) => {
       `,
     [category, name, upc, quantity || null, price || null]
   );
-
-  console.log("insertItem query completed...");
 };
 
 const updateCategory = async ({ prevCategory, newCategory }) => {
-  console.log("updateCategory running...");
   // Update existing category with new category
   await pool.query(
     `
@@ -144,13 +96,6 @@ const updateItem = async ({
   price,
   prevUPC,
 }) => {
-  console.log("updateItem query running...");
-  console.log("prevCategory:", category);
-  console.log("name:", name);
-  console.log("upc:", upc);
-  console.log("quantity:", quantity);
-  console.log("price:", price);
-  console.log("prevUPC:", prevUPC);
   await pool.query(
     `
       UPDATE items
@@ -162,10 +107,8 @@ const updateItem = async ({
 };
 
 const updateItems = async ({ prevCategory, newCategory = "unassigned" }) => {
-  console.log("updateItems running...");
   // Update category_id column for all items of category to newCategory
   // newCategory defaults to 'unassigned'
-
   await pool.query(
     `
       UPDATE items
@@ -179,7 +122,6 @@ const updateItems = async ({ prevCategory, newCategory = "unassigned" }) => {
 const deleteCategory = async ({ category }, callback) => {
   // Does passing updateItems function as a callback make this module more loosely coupled?
   // If updateItems function was called directly here, will this make the module more tightly coupled?
-  console.log("deleteCategory running...");
   await pool.query(
     `
       DELETE FROM categories
@@ -192,9 +134,6 @@ const deleteCategory = async ({ category }, callback) => {
 };
 
 const deleteItem = async ({ upc }) => {
-  console.log("deleteItem query running...");
-  console.log("upc:", upc);
-
   await pool.query(
     `
       DELETE FROM items

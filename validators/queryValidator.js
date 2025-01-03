@@ -25,7 +25,6 @@ const validationChain = [
 const validateQuery = [
   validationChain,
   async (req, res, next) => {
-    console.log("validateQuery running...");
     const errors = validationResult(req);
     if (!errors.isEmpty()) next(errors);
     // Why does this not work?

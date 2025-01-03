@@ -25,10 +25,6 @@ const validateItem = [
       // Custom validators must return a truthy value to indicate that the field is valid, or falsy to indicate it's invalid.
       // https://express-validator.github.io/docs/guides/customizing
       const item = await getItem({ upc: value });
-      console.log("upc custom validator running...");
-      console.log("item:", item);
-      console.log("req.body.password:", req.body.password);
-      console.log(req.body.password ?? item ?? false);
       // How to rewrite this?
       // Editing an item
       //  If password input exists

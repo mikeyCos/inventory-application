@@ -10,11 +10,9 @@ const {
 } = require("../db/queries");
 const validateCategory = require("../validators/categoryValidator");
 const validatePassword = require("../validators/passwordValidator");
-const validateQuery = require("../validators/queryValidator");
 
 const categoriesController = {
   getCategories: asyncHandler(async (req, res) => {
-    console.log("getCategories running from categoriesController...");
     const { action } = req.query;
     const msg = `Category ${action === "edit" ? `updated` : `deleted`}`;
 
@@ -25,7 +23,6 @@ const categoriesController = {
   }),
   getCategoryItems: asyncHandler(async (req, res) => {
     // Need to select items from category
-    console.log("getCategoryItems running...");
     const { category } = req.params;
     const items = await getItems(req.params);
     const { action } = req.query;
@@ -44,7 +41,6 @@ const categoriesController = {
     });
   }),
   getAddCategory: asyncHandler(async (req, res) => {
-    console.log("getAddCategory running...");
     // Is a try...catch block needed?
     // What if req.success is a value other than 'true'?
     // What if category is not in the database?
@@ -58,7 +54,6 @@ const categoriesController = {
     });
   }),
   getEditCategory: asyncHandler(async (req, res) => {
-    console.log("getEditCategory running...");
     const { category } = req.params;
 
     res.render("editCategory", {
@@ -70,7 +65,6 @@ const categoriesController = {
     });
   }),
   getDeleteCategory: asyncHandler(async (req, res) => {
-    console.log("getDeleteCategory running...");
     const { category } = req.params;
     // Need to update all items impacted to 'unassigned' category
     // Need category id or category text
@@ -86,12 +80,11 @@ const categoriesController = {
   postAddCategory: [
     validateCategory,
     asyncHandler(async (req, res) => {
-      console.log("postAddCategory running...");
       const errors = validationResult(req);
 
       if (!errors.isEmpty()) {
         const localErrors = errors.mapped();
-        console.log("localErrors:", localErrors);
+
         return res.status(400).render("addCategory", {
           title: "Add Category",
           errors: { ...localErrors },
@@ -110,13 +103,12 @@ const categoriesController = {
     validateCategory,
     validatePassword,
     asyncHandler(async (req, res) => {
-      console.log("postEditCategory running...");
       const errors = validationResult(req);
       const { category } = req.params;
 
       if (!errors.isEmpty()) {
         const localErrors = errors.mapped();
-        console.log(localErrors);
+
         return res.status(400).render("editCategory", {
           title: "Edit Category",
           errors: { ...localErrors },
@@ -137,13 +129,12 @@ const categoriesController = {
   postDeleteCategory: [
     validatePassword,
     asyncHandler(async (req, res) => {
-      console.log("postDeleteCategory running...");
       const errors = validationResult(req);
       const { category } = req.params;
 
       if (!errors.isEmpty()) {
         const localErrors = errors.mapped();
-        console.log("localErrors:", localErrors);
+
         return res.status(400).render("deleteCategory", {
           title: "Delete Category",
           errors: { ...localErrors },

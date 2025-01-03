@@ -71,5 +71,4 @@ const initDB = async () => {
   await client.end();
 };
 
-// console.log(DATABASE_URL);
 initDB();

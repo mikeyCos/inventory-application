@@ -28,7 +28,7 @@
 
 ### Delete Category
 
-[![Inventory Application Delete CategoryGif][delete-category-gif]](./media/delete_category.gif.gif)
+[![Inventory Application Delete Category Gif][delete-category-gif]](./media/delete_category.gif.gif)
 
 <p align="right">(<a href="#demo-top">back to top</a>)</p>
 
@@ -36,7 +36,7 @@
 
 ### Add Item
 
-[![Inventory Application Add Item][add-item-gif]](./media/add_item.gif)
+[![Inventory Application Add Item Gif][add-item-gif]](./media/add_item.gif)
 
 <p align="right">(<a href="#demo-top">back to top</a>)</p>
 
@@ -44,7 +44,7 @@
 
 ### Edit Item
 
-[![CV Application Gif][references-gif]](./media/demo_references.gif)
+[![Inventory Application Edit Item Gif][edit-item-gif]](./media/edit_item.gif)
 
 <p align="right">(<a href="#demo-top">back to top</a>)</p>
 
@@ -52,7 +52,7 @@
 
 ### Delete Item
 
-[![CV Application Gif][skills-gif]](./demo_skills.gif)
+[![Inventory Application Delete Item Gif][delete-item-gif]](./media/delete_item.gif)
 
 <p align="right">(<a href="#demo-top">back to top</a>)</p>
 
@@ -62,4 +62,6 @@
 [add-category-gif]: ./media/add_category.gif
 [edit-category-gif]: ./media/edit_category.gif
 [delete-category-gif]: ./media/delete_category.gif
-[add-item-gif]: ./media/add_item.gif.gif
+[add-item-gif]: ./media/add_item.gif
+[edit-item-gif]: ./media/edit_item.gif
+[delete-item-gif]: ./media/delete_item.gif
