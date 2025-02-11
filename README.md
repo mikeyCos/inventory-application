@@ -160,9 +160,9 @@ Currently, a 404 page will render when paths, parameters, and queries are invali
   <a href="./demo/media/overview.gif">
     <img src="./demo/media/overview.gif" alt="Usage Overview">
   </a>
-</div>
 
-_For more examples, please refer to the [Demo](./demo/DEMO.md)_
+  _For more examples, please refer to the [Demo](./demo/DEMO.md)_
+</div>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

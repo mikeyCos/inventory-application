@@ -3,7 +3,6 @@ const { getCategory, getItem } = require("../db/queries");
 
 const validationChain = [
   param("category").custom(async (category) => {
-    console.log("category validator running...");
     const categoryExists = await getCategory({ category });
     if (!categoryExists)
       throw new Error(
@@ -12,7 +11,6 @@ const validationChain = [
   }),
   param("upc")
     .custom(async (upc) => {
-      console.log("upc validator running...");
       const itemExists = await getItem({ upc });
       if (!itemExists)
         throw new Error(

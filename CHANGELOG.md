@@ -3,7 +3,7 @@
 ### 02 JAN 2025
 - Updated README.md.
 - Updated DEMO.md.
-- Added `delete_item.gif`, `edit_item.gif`, and `overview.gif` to the `demo/media` directory.
+- Added `delete_item.gif`, `edit_item.gif`, and `overview.gif` to the `demo/media` subdirectory.
 ---
 ### 01 JAN 2025
 - Applied `overflow: hidden` CSS property to the notifications elements.
